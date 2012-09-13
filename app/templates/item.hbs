@@ -1,0 +1,17 @@
+<div class="item">
+  <div class="actor">
+    {{#if url}}<a class="link" href="{{url}}" target="_blank"><i class="i icon-ok"></i></a>{{/if}}
+  </div>
+  <div class="message">
+    <div class="progress progress-success active">
+      <div class="bar" style="width:{{percent}}%;"></div>
+      <div class="content">
+        {{#if content}}
+          {{content}}
+        {{else}}
+          {{remote_source_url}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
