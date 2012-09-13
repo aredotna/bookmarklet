@@ -1,6 +1,10 @@
 Controller = require 'controllers/base/controller'
+ChannelCollection = require 'models/channel_collection'
+SidebarView = require 'views/sidebar_view'
 
 module.exports = class BookmarkletController extends Controller
 
-  init: ->
-    # Initialize bookmarklet
+  initialize: ->
+    @model = new ChannelCollection
+    @view = new SidebarView
+      collection: @model

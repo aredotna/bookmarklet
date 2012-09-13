@@ -1,6 +1,8 @@
 mediator = require 'mediator'
 utils = require 'chaplin/lib/utils'
 
+require 'lib/bookmarklet_helpers.coffee'
+
 # Application-specific view helpers
 # ---------------------------------
 

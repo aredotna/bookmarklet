@@ -4,6 +4,7 @@ routes = require 'routes'
 SessionController = require 'controllers/session_controller'
 Storage = require 'models/storage'
 Layout = require 'views/layout'
+User = require 'models/user'
 
 module.exports = class Application extends Chaplin.Application
   title: 'Arena Bookmarklet'
@@ -24,12 +25,11 @@ module.exports = class Application extends Chaplin.Application
   initLayout: ->
     @layout = new Layout {@title}
 
-
-  initControllers: ->
-    new SessionController()
-
   initMediator: ->
-    Chaplin.mediator.user = null
+    Chaplin.mediator.user = new User
     Chaplin.mediator.channel = null
     Chaplin.mediator.storage = new Storage
     Chaplin.mediator.seal()
+
+  initControllers: ->
+    new SessionController()
