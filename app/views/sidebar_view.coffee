@@ -16,7 +16,7 @@ module.exports = class SidebarView extends View
     @on 'channel:change', @resetChannel
 
   getTemplateData: ->
-    current_channel: @current_channel.toJSON()
+    current_channel: mediator.channel.toJSON()
 
   events:
     'click .close' : 'closeWindow'
@@ -47,12 +47,11 @@ module.exports = class SidebarView extends View
       onselect: (title) => @setChannel(title)
 
     @dropzone?.dispose()
-    @dropzone = new DropView(model: @current_channel)
+    @dropzone = new DropView(model: mediator.channel)
     @$('#drop').html(@dropzone.render().$el)
 
   setChannel: (title)->
-    @current_channel = _.first @collection.where(title: title)
-    mediator.channel = @current_channel
+    mediator.channel = _.first @collection.where(title: title)
     mediator.storage.set "currentChannel", title
 
     @trigger('channel:change')
