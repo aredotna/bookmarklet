@@ -10,7 +10,7 @@ module.exports = class SessionController extends Controller
     @subscribeEvent 'login:successful', @getSession
     @subscribeEvent 'login:successful', @redirectHome
     @subscribeEvent 'login', @setupAjaxAuth
-
+    @subscribeEvent 'login', @removeLoginView
     @getSession()
 
   getSession: ->
@@ -45,3 +45,6 @@ module.exports = class SessionController extends Controller
     $.ajaxSetup
       headers:
         'X-AUTH-TOKEN': mediator.storage.getToken()
+
+  removeLoginView: ->
+    unless !@view then @view.dispose()
