@@ -1,6 +1,10 @@
 @import "_variables";
 @import "_mixins";
 
+::-moz-selection { background: $blue-10; color: $white; text-shadow: none; }
+::selection { background: $blue-10; color: $white; text-shadow: none; }
+
+
 #bookmarklet {
   @include border-box;
   position: fixed;
