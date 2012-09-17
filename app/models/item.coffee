@@ -1,5 +1,5 @@
 Model = require 'models/base/model'
-
+mediator = require 'mediator'
 
 module.exports = class Item extends Model
 
