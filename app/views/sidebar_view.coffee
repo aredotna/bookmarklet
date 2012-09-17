@@ -26,7 +26,7 @@ module.exports = class SidebarView extends View
 
   resetChannel: ->
     # fail-safe in case channel title is changed
-    if localStorage["currentChannel"]?
+    if mediator.storage.get("currentChannel")?
       channel = _.first @collection.where(title: mediator.storage.get "currentChannel")
 
     if !channel
@@ -53,7 +53,7 @@ module.exports = class SidebarView extends View
   setChannel: (title)->
     @current_channel = _.first @collection.where(title: title)
     mediator.channel = @current_channel
-    localStorage["currentChannel"] = title
+    mediator.storage.set "currentChannel", title
 
     @trigger('channel:change')
 
