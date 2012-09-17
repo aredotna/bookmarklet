@@ -10,6 +10,7 @@ module.exports = class DropView extends View
   id: 'drop-content'
 
   initialize: (options) ->
+    super
     @subscribeEvent 'drop', @handleDrop
 
   events:
@@ -69,5 +70,4 @@ module.exports = class DropView extends View
 
   render: =>
     @$el.html @template(@model.toJSON())
-
     return this
