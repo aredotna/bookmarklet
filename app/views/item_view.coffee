@@ -2,12 +2,12 @@ View = require 'views/base/view'
 template = require 'templates/item'
 mediator = require 'mediator'
 
-class ItemView extends View
+module.exports = class ItemView extends View
   template: template
   className: 'template-upload'
 
   initialize: (options) ->
-    @modelBind 'change:url' @render
+    @modelBind 'change:url', @render
 
   runProgressBar: ->
     that = @
