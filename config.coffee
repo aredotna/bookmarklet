@@ -18,12 +18,12 @@ exports.config =
         ]
 
     stylesheets:
+      defaultExtension: 'scss'
       joinTo:
         'stylesheets/app.css': /^(app|vendor)/
         'test/stylesheets/test.css': /^test/
-      order:
-        before: ['vendor/styles/normalize.css']
-        after: ['vendor/styles/helpers.css']
 
     templates:
       joinTo: 'javascripts/app.js'
+
+  framework: 'chaplin'
