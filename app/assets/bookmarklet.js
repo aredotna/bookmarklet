@@ -64,6 +64,8 @@
     function startDrag (e) {
 
       var targetParent;
+      
+      sendLocation()
 
       if (typeof e.dataTransfer.getData("text/html") == "undefined" 
         && e.target.tagName == "IMG") {
@@ -171,7 +173,12 @@
       arena_frame.contentWindow.postMessage(data, "*")
     }
 
-
+    function sendLocation(){
+      sendMessage({
+        action:"location",
+        value: window.location
+      })
+    }
 
     // Utility
 
