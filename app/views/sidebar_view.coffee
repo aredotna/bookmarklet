@@ -53,7 +53,7 @@ module.exports = class SidebarView extends View
   setChannel: (title)->
     @current_channel = _.first @collection.where(title: title)
     mediator.channel = @current_channel
-  localStorage["currentChannel"] = title
+    localStorage["currentChannel"] = title
 
     @trigger('channel:change')
 
