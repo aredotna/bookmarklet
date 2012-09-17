@@ -1,55 +1,32 @@
-mediator = require 'mediator'
-utils = require 'lib/utils'
 View = require 'views/base/view'
-template = require 'views/templates/login'
+template = require 'templates/login'
+config = require 'config'
+mediator = require 'mediator'
 
 module.exports = class LoginView extends View
   template: template
-  id: 'login'
-  container: '#content-container'
   autoRender: true
 
-  # Expects the serviceProviders in the options
-  initialize: (options) ->
-    super
-    @initButtons options.serviceProviders
+  events: 
+    "click input[type=submit]" : "submitLogin"
+    "keypress" : "checkForSubmit"
 
-  # In this project we currently only have one service provider and therefore
-  # one button. But this should allow for different service providers.
-  initButtons: (serviceProviders) ->
-    for serviceProviderName, serviceProvider of serviceProviders
+  checkForSubmit: (e)->
+    if e.keycode is 13
+      @login()
+      false
 
-      buttonSelector = ".#{serviceProviderName}"
-      @$(buttonSelector).addClass('service-loading')
+  submitLogin: (e) ->
+    
+    $.ajax
+      type: 'POST'
+      url: "#{config.api.versionRoot}/tokens"
+      data:
+        email: @$('#session_email').val()
+        password: @$('#session_password').val()
+      success: (data) ->
+        mediator.storage.setToken data.token
+        mediator.publish 'login:successful'
+      error: -> mediator.publish 'login:failure'
+    false
 
-      loginHandler = _(@loginWith).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      @delegate 'click', buttonSelector, loginHandler
-
-      loaded = _(@serviceProviderLoaded).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      serviceProvider.done loaded
-
-      failed = _(@serviceProviderFailed).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      serviceProvider.fail failed
-
-  loginWith: (serviceProviderName, serviceProvider, e) ->
-    e.preventDefault()
-    return unless serviceProvider.isLoaded()
-    mediator.publish 'login:pickService', serviceProviderName
-    mediator.publish '!login', serviceProviderName
-
-  serviceProviderLoaded: (serviceProviderName) ->
-    @$(".#{serviceProviderName}").removeClass('service-loading')
-
-  serviceProviderFailed: (serviceProviderName) ->
-    @$(".#{serviceProviderName}")
-      .removeClass('service-loading')
-      .addClass('service-unavailable')
-      .attr('disabled', true)
-      .attr('title', "Error connecting. Please check whether you are
-blocking #{utils.upcase(serviceProviderName)}.")
