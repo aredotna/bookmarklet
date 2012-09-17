@@ -11,3 +11,6 @@ Handlebars.registerHelper "get_state", (published, open) ->
 
 Handlebars.registerHelper "get_state_lowercase", (published, open) ->
   Handlebars.helpers.downcase(Handlebars.helpers.get_state(published, open))
+
+Handlebars.registerHelper 'if_profile', (channel, options) ->
+  if @kind is "profile" then options.fn(this) else options.inverse(this)
