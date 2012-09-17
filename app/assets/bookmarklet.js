@@ -5,6 +5,8 @@
     var arena_div;
 
 
+    initialize()
+
 
     function initialize(){
       createFrame();
@@ -179,6 +181,9 @@
         value: window.location
       })
     }
+
+
+
 
     // Utility
 
