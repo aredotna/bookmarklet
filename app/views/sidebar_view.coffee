@@ -8,11 +8,15 @@ mediator = require 'mediator'
 module.exports = class SidebarView extends View
   template: template
   id: "content"
+  autoRender: false
 
   initialize: (options) ->
-    debugger
+    super
     @resetChannel()
-    @on 'channel:change', @render
+    @on 'channel:change', @resetChannel
+
+  getTemplateData: ->
+    current_channel: @current_channel.toJSON()
 
   events:
     'click .close' : 'closeWindow'
@@ -48,14 +52,11 @@ module.exports = class SidebarView extends View
 
   setChannel: (title)->
     @current_channel = _.first @collection.where(title: title)
-    localStorage["currentChannel"] = title
+    mediator.channel = @current_channel
+  localStorage["currentChannel"] = title
+
     @trigger('channel:change')
 
-  render: =>
-    @$el.html @template
-      channels: @collection
-      current_channel: @current_channel.toJSON()
-    
+  afterRender: ->
+    super
     @setup()
-
-    return this
