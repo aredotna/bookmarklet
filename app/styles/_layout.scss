@@ -1,0 +1,63 @@
+#login {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  background: $deepBlue;
+}
+
+// LAYOUT
+// ------
+#sidebar {
+  @include border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $fluidSidebarWidth;
+  height: 100%;
+  z-index: $zindexFixedSidebar;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  #primary-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $navBarHeight;
+  }
+
+  #sidebar-wrapper {
+    position: absolute;
+    top: $navBarHeight;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+  }
+}
+
+#container {
+  margin-left: $fluidSidebarWidth;
+  padding: 0 $gridGutterWidth;
+}
+
+#main-content {
+  @include clearfix;
+  // Bottom margin so that the add form doesn't overlap
+  margin-bottom: $gridGutterWidth*4;
+}
+
+// NEW BLOCK FIELD
+// ---------------
+#render-editor {
+  @include border-box;
+  width: 100%;
+  padding: 0 0 0 $fluidSidebarWidth;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindexFixedAddField;
+  background: transparent;
+}

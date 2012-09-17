@@ -1,0 +1,273 @@
+// SEARCH FORM
+// -----------
+#search { margin: 0; }
+
+.search-query {
+  @include border-box;
+  width: 100%;
+  height: $navBarHeight;
+  margin: 0;
+  padding: 0 $gridGutterWidth/2;
+  background: $deepBlue url(../images/brand/mark_tiny.png) no-repeat ($fluidSidebarWidth - ($gridGutterWidth*2)) center;
+  color: #fff;
+  font-size: $baseFontSize;
+  border: none; 
+  @include border-radius(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  &:focus {
+    background-color: #000;
+    color: #fff;
+    text-decoration: underline;
+    @include box-shadow(none);
+  }
+
+  &.loading {
+    background-repeat: repeat;
+    color: #fff;
+    @include striped($blue-8);
+    @include background-size(40px 40px);
+    @include inset-shadow;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+       -moz-animation: progress-bar-stripes 2s linear infinite;
+            animation: progress-bar-stripes 2s linear infinite;
+  }
+}
+
+// SEARCH RESULTS
+// --------------
+.results-header {
+  border-left: 4px solid $yellow-7; 
+  text-align: left;
+  text-transform: uppercase;
+
+  .close {
+    position: absolute;
+    top:0;
+    right: $gridGutterWidth/4;
+  }
+}
+
+.results-header-title {
+    position: relative;
+}
+
+// SEARCH RESULTS
+// --------------
+.results .item { border-left: 4px solid $yellow-7; }
+
+
+// SIDEBAR
+// -------
+.sidebar {
+  border-right: 3px solid $grey-8;
+  background-color: #fff;
+}
+
+.sidebar-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-item,
+.item.ui-draggable-dragging {
+  font-family: 'Lucida Grande', sans-serif;
+  background-color: transparent;
+  position: relative;
+  $shadow: inset 0px 1px 0px #fff, inset 0px -1px 0px $grey-9;
+  @include box-shadow($shadow);
+
+  .area {
+    display: block;
+    padding: $baseLineHeight/2;
+    
+    &:hover {
+      text-decoration: none;
+
+      .item-title .title { text-decoration: underline; }
+    }
+  }
+
+  // Accomodate avatars for users
+  &.user {
+    @include clearfix;
+
+    .area { float: left; }
+  }
+
+  .item-title,
+  .item-meta { display: block; }
+
+  .item-title {
+    color: $grey-5;
+    text-shadow: 1px 1px 1px rgba(255,255,255,1);
+    font-weight: bold;
+    word-wrap: break-word;
+  }
+
+  .item-meta {
+    font-size: $baseFontSize - 2;
+    color: $grey-7;
+    text-shadow: 1px 1px 1px #fff;
+    
+    span { text-transform: lowercase; }
+
+    .updated { color: $green-6; }
+  }
+
+  // Handle for dragging
+  .handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: $gridGutterWidth;
+    visibility: hidden;
+  }
+    &:hover .handle {
+      visibility: visible;
+      cursor: move;
+    }
+
+  // Active / depressed
+  &.active {
+    background: $blue-8;
+    @include inset-shadow;
+    
+    .item-meta, .item-title, .item-meta .updated {
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.25) !important;
+    }
+
+  }
+
+  &.drop-loading {
+    @include striped($mediumGreen);
+    @include background-size(40px 40px);
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+       -moz-animation: progress-bar-stripes 2s linear infinite;
+            animation: progress-bar-stripes 2s linear infinite;
+    @include inset-shadow;
+
+    .item-meta,
+    .item-title {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.25) !important;
+    }
+  }
+
+  &.loading, &.highlight.loading, &.loading:hover, &.highlight.loading:hover {
+    @include striped($blue-8);
+    @include background-size(40px 40px);
+    @include inset-shadow;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+       -moz-animation: progress-bar-stripes 2s linear infinite;
+            animation: progress-bar-stripes 2s linear infinite;
+
+    .item-meta {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.1);
+    }
+    .item-title {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.25) !important;
+    }
+  }
+}
+
+// Highlight during keyboard navigation
+.highlight {
+  background-color: $yellow-7;
+  border-top-color: $yellow-5;
+  @include inset-shadow;
+
+  .item-title, .item-meta { color: $yellow-5; }
+}
+
+.sidebar-list {
+  // Hover state when dragging a block over
+  .droppable-hover.sidebar-item {
+    background-color: $green-5;
+    @include inset-shadow;
+
+    .item-meta {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.1);
+    }
+    .item-title {
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.25) !important;
+    }
+  }
+
+  // Action links for search and channel creation
+  .actions {
+    .item { background-color: $grey-10; }
+    .area { margin-right: 30px; } // Account for icons
+
+    .item-title .title {
+      padding: 1px 4px 2px;
+      font-size: $baseFontSize * .846;
+      font-weight: bold;
+      line-height: 14px;
+      color: #fff;
+      vertical-align: baseline;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+      background-color: $grey-6;
+    }
+  }
+
+  .link-create-private, .link-create-public, .link-search {
+    &:before {
+      content: "";
+      display: block;
+      background: transparent url(../images/interface/arena_icons.png) no-repeat 0 0;
+      width: 18px;
+      height: 14px;
+      position: absolute;
+      top: $gridGutterWidth;
+      right: $gridGutterWidth;
+    }
+  }
+
+  .link-create-private:before { background-position: 0      -24px; }
+  .link-create-public:before  { background-position: -24px  -24px; }
+  .link-search:before         { background-position: -48px  -24px; }
+
+  // Overrides
+  .btn.fill { border-width: 0 0 1px 0; }
+}
+
+// SETTINGS DROPDOWN
+// -----------------
+.sidebar-item-settings {
+  position: absolute;
+  top: $baseLineHeight/1.5;
+  right: $baseLineHeight/1.5;
+
+  .dropdown-toggle { @include box-shadow(none); }
+
+  .dropdown-menu {
+    right: 0;
+    font-size: $baseFontSize - 2;
+  }
+}
+
+// DRAG IN PROGRESS
+// ----------------
+.sidebar-item.dragging {
+  background: #fff;
+  border: 1px solid $grey-9;
+  width: $fluidSidebarWidth;
+  z-index: 2000;
+}
+
+
+
+// MISC.
+// -----
+.list, .interface-list {
+  margin: 0;
+  list-style: none;
+}
