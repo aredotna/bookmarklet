@@ -24,9 +24,17 @@ module.exports = class SidebarView extends View
     # fail-safe in case channel title is changed
     if localStorage["currentChannel"]?
       channel = _.first @collection.where(title: mediator.storage.get "currentChannel")
-    channel = _.first @collection.where(title: mediator.user.get 'username') if not channel?
 
-    @setChannel(channel.get('title'))
+    if !channel
+      channel = _.first @collection.where(title: mediator.user.get('user').username) 
+
+    if !channel 
+        channel = @collection.first()
+
+    if channel 
+      @setChannel(channel.get('title'))
+
+    @render()
 
   setup: ->
     @$('#channel-picker').typeahead
