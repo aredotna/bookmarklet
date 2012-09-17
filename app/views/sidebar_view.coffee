@@ -4,7 +4,6 @@ template = require 'templates/sidebar'
 mediator = require 'mediator'
 
 
-
 module.exports = class SidebarView extends View
   template: template
   id: "content"
@@ -13,7 +12,8 @@ module.exports = class SidebarView extends View
   initialize: (options) ->
     super
     @resetChannel()
-    @on 'channel:change', @resetChannel
+    @subscribeEvent 'channel:change', @render
+    @render()
 
   getTemplateData: ->
     current_channel: mediator.channel.toJSON()
@@ -38,8 +38,6 @@ module.exports = class SidebarView extends View
     if channel 
       @setChannel(channel.get('title'))
 
-    @render()
-
   setup: ->
     @$('#channel-picker').typeahead
       source: @collection.pluck('title')
@@ -54,7 +52,7 @@ module.exports = class SidebarView extends View
     mediator.channel = _.first @collection.where(title: title)
     mediator.storage.set "currentChannel", title
 
-    @trigger('channel:change')
+    mediator.publish('channel:change')
 
   afterRender: ->
     super
