@@ -17,9 +17,10 @@ module.exports = class Application extends Chaplin.Application
     @initMediator()
 
     @initControllers()
-
     @initRouter routes
     Object.freeze? this
+
+    @propagateEvents()
 
 
   initLayout: ->
@@ -33,3 +34,8 @@ module.exports = class Application extends Chaplin.Application
 
   initControllers: ->
     new SessionController()
+
+  propagateEvents: ->
+    window.addEventListener 'message', (e) -> 
+      if e.data isnt 'close'
+        mediator.publish(e.data.action, e.data)
