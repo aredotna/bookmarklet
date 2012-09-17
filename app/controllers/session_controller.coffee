@@ -1,6 +1,7 @@
 mediator = require 'mediator'
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
+LoginView = require 'views/login_view'
 
 module.exports = class SessionController extends Controller
 
@@ -19,6 +20,11 @@ module.exports = class SessionController extends Controller
         success: (model, response) => @publishLogin()
     else
       mediator.publish 'guest_user'
+      @requestLogin()
+
+  requestLogin: ->
+    @view = new LoginView
+      container: $('.bookmarklet-content')
 
   publishLogin: ->
     mediator.publish 'login', mediator.user
