@@ -13,12 +13,14 @@
   <script src="javascripts/app.js"></script>
   <script>require('initialize');</script>
 </head>
-<body>
-  <header class="header-container" id="header-container"></header>
 
-  <div class="container outer-container">
-    <div class="page-container" id="page-container">
-    </div>
+<body class="application bookmarklet embed">
+
+  <div class='bookmarklet sidebar' id='bookmarklet'>
+<!--     <a class='close' href='#' onclick='window.top.postMessage({action:"close"},"*");'>×</a>
+ -->    <div class="bookmarklet-content wrap"></div>
   </div>
+
 </body>
+
 </html>
