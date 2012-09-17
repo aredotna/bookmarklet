@@ -48,7 +48,7 @@
     function setHostEvents(){
       document.addEventListener('dragstart', startDrag, true);
       document.addEventListener('dragend', stopDrag, true);
-      document.onkeyup(checkForClose)
+      document.onkeyup = checkForClose;
       window.addEventListener("message", getMessage);
     }
 
