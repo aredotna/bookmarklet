@@ -42,19 +42,19 @@ module.exports = class DropView extends View
   setLoading: ->   @$('#drop-zone').addClass('loading')
   unsetLoading: -> @$('#drop-zone').removeClass('loading')
 
-  createBlock: (data, type) ->
-    item = new Bookmarklet.Models.Item(data.block)
-    item.set('type', type)
+  createBlock: (data) ->
+    item = new Item(data.block)
+    item.set('type', data.type)
 
-    # itemview = new Bookmarklet.Views.ItemView(model: item)
-    # @$('#item-container').append(itemview.render().$el)
-    # itemview.runProgressBar()
+    itemview = new ItemView(model: item)
+    @$('#item-container').append(itemview.render().$el)
+    itemview.runProgressBar()
 
     @setLoading()
-
+    
     $.ajax
       type: 'POST'
-      url: "/blocks?type=#{type}&channel_id=#{@model.id}"
+      url: "#{config.api.versionRoot}/channels/#{mediator.channel.id}/blocks"
       data: data
       success: (data) =>
         item.set(data)
