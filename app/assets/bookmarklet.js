@@ -69,7 +69,7 @@
 
       if (typeof e.dataTransfer.getData("text/html") == "undefined" 
         && e.target.tagName == "IMG") {
-        targetParent = aBtransverse(e.target, "A");
+        targetParent = closest(e.target, "A");
       }
 
       if (targetParent) {
@@ -182,7 +182,7 @@
 
     // Utility
 
-    function aBtransverse(that, tagname) {
+    function closest(that, tagname) {
       while (that.parentNode) {
         that = that.parentNode;
         if (that.tagName == tagname) return that
