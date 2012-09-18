@@ -11,7 +11,7 @@ module.exports = class ItemView extends View
 
   runProgressBar: ->
     that = @
-    @progress = setInterval(()->
+    @progress = setInterval(()=>
       $bar = that.$('.bar');
 
       if $bar.width() is 400
