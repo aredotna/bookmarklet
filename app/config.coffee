@@ -1,5 +1,6 @@
 config = 
   api: {}
+  client: {}
   pusher: {}
 
 production             = no
