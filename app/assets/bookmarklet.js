@@ -159,7 +159,6 @@
     // Message exchange
 
     function getMessage(e) {
-
       switch (e.data.action) {
         case "issidebar":
           sendMessage({
@@ -168,8 +167,12 @@
           })
           break;
 
-        case "close"
-          arena_close()
+        case "close":
+          arena_close();
+          break;
+
+        case "ready":
+          sendLocation();
           break;
       }
     }
