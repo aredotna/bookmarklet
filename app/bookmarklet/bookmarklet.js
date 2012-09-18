@@ -171,7 +171,7 @@
           arena_close();
           break;
 
-        case "ready":
+        case "bookmarklet:ready":
           sendLocation();
           break;
       }
@@ -184,10 +184,9 @@
     function sendLocation(){
       sendMessage({
         action:"location",
-        value: window.location
+        value: window.location.href
       })
     }
-
 
 
 
@@ -199,8 +198,6 @@
         if (that.tagName == tagname) return that
       }
     }
-
-
 
   }
 })();
