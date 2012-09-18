@@ -15,10 +15,11 @@ module.exports = class DropView extends View
 
   events:
     "click .page-scrape" : "postLink"
+    "click .block-close" : "reset"
 
   postLink: ->
     data =
-      source: document.referrer
+      source: mediator.source || document.referrer
       type: "Block"
     
     @createBlock(data)
@@ -63,11 +64,26 @@ module.exports = class DropView extends View
       type: 'POST'
       url: "#{config.api.versionRoot}/channels/#{mediator.channel.id}/blocks"
       data: data
-      success: (data) =>
-        item.set(data)
-        item.setURL()
-        @unsetLoading()
+      success: (data)=>
+        @blockCreated(data, item)
+      error: @blockCreationFailed
+
+  blockCreated:(data, item) =>
+    item.set(data)
+    item.setURL()
+    @unsetLoading()
+    @$('.block-status').html('Block created')
+    @$('.block-link').attr('href', item.get('url'))
+    @$('#drop-zone').addClass('success').removeClass('loading error')
+
+
+  blockCreationFailed: =>
+    @$('.block-status').html('Could not create block')
+    @$('#drop-zone').addClass('error').removeClass('loading success')
 
   render: =>
     @$el.html @template(@model.toJSON())
     return this
+
+  reset: ->
+    @$('#drop-zone').removeClass('success loading error');

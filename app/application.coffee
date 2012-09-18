@@ -21,13 +21,13 @@ module.exports = class Application extends Chaplin.Application
     Object.freeze? this
 
     @propagateEvents()
-    mediator.on 'location', @setLocation
+    mediator.on 'location', @setSource
     mediator.on  'message:send', @sendMessage
 
     @ready()
 
-  setLocation: (location)->
-    mediator.pageUrl = location.href
+  setSource: (data)->
+    mediator.source = data.value
 
   initLayout: ->
     @layout = new Layout {@title}
@@ -36,7 +36,7 @@ module.exports = class Application extends Chaplin.Application
     Chaplin.mediator.user = new User
     Chaplin.mediator.channel = null
     Chaplin.mediator.storage = new Storage
-    Chaplin.mediator.pageUrl = ''
+    Chaplin.mediator.source = ''
     Chaplin.mediator.seal()
 
   initControllers: ->
