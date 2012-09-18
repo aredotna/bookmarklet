@@ -5,17 +5,18 @@ Item = require 'models/item'
 ItemView = require 'views/item_view'
 config = require 'config'
 
+
 module.exports = class DropView extends View
   template: template
   id: 'drop-content'
 
-  initialize: (options) ->
-    super
-    @subscribeEvent 'drop', @handleDrop
-
   events:
     "click .page-scrape" : "postLink"
     "click .block-close" : "reset"
+
+  initialize: (options) ->
+    super
+    @subscribeEvent 'drop', @handleDrop
 
   postLink: ->
     data =
@@ -24,7 +25,6 @@ module.exports = class DropView extends View
     
     @createBlock(data)
     #Bookmarklet.metrics.trigger('bookmark', "Block", 'Save page')
-
 
   handleDrop: (data) ->
     $html = $(data.value['text/html'])
@@ -75,7 +75,6 @@ module.exports = class DropView extends View
     @$('.block-status').html('Block created')
     @$('.block-link').attr('href', item.get('url'))
     @$('#drop-zone').addClass('success').removeClass('loading error')
-
 
   blockCreationFailed: =>
     @$('.block-status').html('Could not create block')
