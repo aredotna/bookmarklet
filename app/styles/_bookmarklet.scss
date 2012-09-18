@@ -76,7 +76,7 @@
 
       .block-status {
         margin-top: $gridGutterWidth;
-        margin-bottom: 3px;
+        margin-bottom: 8px;
         font-size: 15px;
         font-weight: bold;
         display: block;
@@ -84,8 +84,8 @@
       .block-link,
       .block-close {
         font-size: 12px;
+        line-height: 15px;
         color: white;
-        padding: 5px;
       }
     }
 
@@ -93,7 +93,7 @@
       background-color: $green;
       .block-link,
       .block-close {
-        display: inline;
+        display: block;
       }
     }
 
@@ -103,7 +103,7 @@
         display: block;
       }
       .block-close {
-        display: inline;
+        display: block;
       }
     }
 
