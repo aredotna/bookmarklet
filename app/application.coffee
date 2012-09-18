@@ -24,6 +24,8 @@ module.exports = class Application extends Chaplin.Application
     mediator.on 'location', @setLocation
     mediator.on  'message:send', @sendMessage
 
+    @ready()
+
   setLocation: (location)->
     mediator.pageUrl = location.href
 
@@ -47,3 +49,6 @@ module.exports = class Application extends Chaplin.Application
 
   sendMessage: (data)->
     window.top.postMessage(data, '*')
+
+  ready: ->
+    @sendMessage action: 'ready'
