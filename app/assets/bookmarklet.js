@@ -67,8 +67,6 @@
 
       var targetParent;
       
-      sendLocation()
-
       if (typeof e.dataTransfer.getData("text/html") == "undefined" 
         && e.target.tagName == "IMG") {
         targetParent = closest(e.target, "A");
@@ -161,13 +159,18 @@
     // Message exchange
 
     function getMessage(e) {
-      if (e.data.action == "issidebar"){
-        sendMessage({
-          action: "issidebar",
-          value: true
-        })
-      } else {
-        if (e.data.action == "close") arena_close()
+
+      switch (e.data.action) {
+        case "issidebar":
+          sendMessage({
+            action: "issidebar",
+            value: true
+          })
+          break;
+
+        case "close"
+          arena_close()
+          break;
       }
     }
 
