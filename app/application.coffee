@@ -51,4 +51,4 @@ module.exports = class Application extends Chaplin.Application
     window.top.postMessage(data, '*')
 
   ready: ->
-    @sendMessage action: 'ready'
+    @sendMessage action: 'bookmarklet:ready'
