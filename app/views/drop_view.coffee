@@ -5,25 +5,26 @@ Item = require 'models/item'
 ItemView = require 'views/item_view'
 config = require 'config'
 
+
 module.exports = class DropView extends View
   template: template
   id: 'drop-content'
+
+  events:
+    "click .page-scrape" : "postLink"
+    "click .block-close" : "reset"
 
   initialize: (options) ->
     super
     @subscribeEvent 'drop', @handleDrop
 
-  events:
-    "click .page-scrape" : "postLink"
-
   postLink: ->
     data =
-      source: document.referrer
+      source: mediator.source || document.referrer
       type: "Block"
     
     @createBlock(data)
     #Bookmarklet.metrics.trigger('bookmark', "Block", 'Save page')
-
 
   handleDrop: (data) ->
     $html = $(data.value['text/html'])
@@ -63,11 +64,25 @@ module.exports = class DropView extends View
       type: 'POST'
       url: "#{config.api.versionRoot}/channels/#{mediator.channel.id}/blocks"
       data: data
-      success: (data) =>
-        item.set(data)
-        item.setURL()
-        @unsetLoading()
+      success: (data)=>
+        @blockCreated(data, item)
+      error: @blockCreationFailed
+
+  blockCreated:(data, item) =>
+    item.set(data)
+    item.setURL()
+    @unsetLoading()
+    @$('.block-status').html('Block created')
+    @$('.block-link').attr('href', item.get('url'))
+    @$('#drop-zone').addClass('success').removeClass('loading error')
+
+  blockCreationFailed: =>
+    @$('.block-status').html('Could not create block')
+    @$('#drop-zone').addClass('error').removeClass('loading success')
 
   render: =>
     @$el.html @template(@model.toJSON())
     return this
+
+  reset: ->
+    @$('#drop-zone').removeClass('success loading error');

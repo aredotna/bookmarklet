@@ -22,12 +22,12 @@ module.exports = class SidebarView extends View
     'click .close' : 'closeWindow'
 
   closeWindow: (e)->
-    window.top.postMessage({action:"close"},"*")
+    mediator.publish 'message:send', action:"close"
 
   resetChannel: ->
     # fail-safe in case channel title is changed
-    if mediator.storage.get("currentChannel")?
-      channel = _.first @collection.where(title: mediator.storage.get "currentChannel")
+    if mediator.storage.getItem("currentChannel")?
+      channel = _.first @collection.where(title: mediator.storage.getItem "currentChannel")
 
     if !channel
       channel = _.first @collection.where(title: mediator.user.get('user').username) 
@@ -50,7 +50,7 @@ module.exports = class SidebarView extends View
 
   setChannel: (title)->
     mediator.channel = _.first @collection.where(title: title)
-    mediator.storage.set "currentChannel", title
+    mediator.storage.setItem "currentChannel", title
 
     mediator.publish('channel:change')
 
