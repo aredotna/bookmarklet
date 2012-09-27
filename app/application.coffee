@@ -2,6 +2,7 @@ Chaplin = require 'chaplin'
 mediator = require 'mediator'
 routes = require 'routes'
 SessionController = require 'controllers/session_controller'
+BookmarkletController = require 'controllers/bookmarklet_controller'
 Storage = require 'models/storage'
 Layout = require 'views/layout'
 User = require 'models/user'
@@ -41,6 +42,7 @@ module.exports = class Application extends Chaplin.Application
 
   initControllers: ->
     new SessionController()
+    new BookmarkletController()
 
   propagateEvents: ->
     window.addEventListener 'message', (e) ->
