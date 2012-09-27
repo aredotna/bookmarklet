@@ -1,2 +1,2 @@
 module.exports = (match) ->
-  match '', 'bookmarklet#home'
+  match '', 'bookmarklet#initialize'
