@@ -4,8 +4,7 @@ SidebarView = require 'views/sidebar_view'
 
 module.exports = class BookmarkletController extends Controller
 
-  initialize: ->
-    super
+  start: ->
     console.log 'home'
     @subscribeEvent 'login', @showInterface
 
