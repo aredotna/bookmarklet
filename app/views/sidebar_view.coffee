@@ -22,8 +22,8 @@ module.exports = class SidebarView extends View
   events:
     'click .close' : 'closeWindow'
 
-  closeWindow: (e)->
-    mediator.publish 'message:send', action:"close"
+  closeWindow: (e) ->
+    mediator.publish 'message:send', action: "close"
 
   resetChannel: ->
     # fail-safe in case channel title is changed
