@@ -27,6 +27,7 @@ module.exports = class SessionController extends Controller
       container: $('.bookmarklet-content')
 
   publishLogin: ->
+    console.log 'logged in', mediator.user
     mediator.publish 'login', mediator.user
 
   redirectHome: ->
