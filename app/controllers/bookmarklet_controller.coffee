@@ -5,9 +5,11 @@ SidebarView = require 'views/sidebar_view'
 module.exports = class BookmarkletController extends Controller
 
   home: ->
+    console.log 'home'
     @subscribeEvent 'login', @showInterface
 
   showInterface: ->
+    console.log 'should be showing showInterface'
     @model = new ChannelCollection
     @view = new SidebarView
       collection: @model

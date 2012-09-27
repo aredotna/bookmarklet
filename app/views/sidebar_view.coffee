@@ -10,6 +10,7 @@ module.exports = class SidebarView extends View
   autoRender: false
 
   initialize: (options) ->
+    console.log 'this is a SidebarView', @
     super
     @resetChannel()
     @subscribeEvent 'channel:change', @render
