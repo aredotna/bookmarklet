@@ -21,7 +21,7 @@
     function createFrame(){
       arena_frame = document.createElement("iframe");
       arena_frame.name = arena_frame.id = "arena_frame";
-      arena_frame.src = "http://54.243.223.202/bookmarklet";
+      arena_frame.src = "http://are.na/bookmarklet";
       document.body.appendChild(arena_frame);
     }
 
