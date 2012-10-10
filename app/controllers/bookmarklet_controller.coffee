@@ -1,5 +1,6 @@
 Controller = require 'controllers/base/controller'
 ChannelCollection = require 'models/channel_collection'
+Channel = require 'models/channel'
 SidebarView = require 'views/sidebar_view'
 mediator = require 'mediator'
 
@@ -8,7 +9,6 @@ module.exports = class BookmarkletController extends Controller
   initialize: ->
     super
     @start()
-
 
   start: ->
     @subscribeEvent 'login', @showInterface
