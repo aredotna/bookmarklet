@@ -60,38 +60,30 @@
     }
 
 
-
     // Document drag events
 
     function startDrag (e) {
-
       var targetParent;
       
       if (typeof e.dataTransfer.getData("text/html") == "undefined" 
         && e.target.tagName == "IMG") {
         targetParent = closest(e.target, "A");
-      }
 
-      if (targetParent) {
         parentHTML = targetParent.cloneNode(false); 
         parentHTML.href = parentHTML.href;
-
+ 
         targetImage = e.target.cloneNode(false);
         targetImage.src = targetImage.src;
         parentHTML.appendChild(targetImage);
         e.dataTransfer.setData("text/html", parentHTML.outerHTML);
-      } else {
-        targetImage = e.target.cloneNode(false);
-        targetImage.src = targetImage.src;
-        e.dataTransfer.setData("text/html", targetImage.outerHTML);
-      }
+      } 
+
       arena_div.style.display = "block";
     };
 
     function stopDrag (e) {
       arena_div.style.display = "none";
     }
-
 
 
     // Target drag events
