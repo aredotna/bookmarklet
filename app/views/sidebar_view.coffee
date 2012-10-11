@@ -12,7 +12,7 @@ module.exports = class SidebarView extends View
   autoRender: yes
 
   events:
-    'click .close' : 'closeWindow'
+    'click .close-marklet' : 'closeWindow'
 
   initialize: (options) ->
     super
@@ -28,7 +28,7 @@ module.exports = class SidebarView extends View
       channel = _.first @collection.where(title: mediator.user.get('user').username) 
 
     if !channel 
-        channel = @collection.first()
+      channel = @collection.first()
 
     if channel 
       @setChannel(channel.get('title'))
