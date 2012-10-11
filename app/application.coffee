@@ -47,7 +47,6 @@ module.exports = class Application extends Chaplin.Application
   propagateEvents: ->
     window.addEventListener 'message', (e) ->
       if e.data isnt 'close'
-        console.log 'e.data.action', e.data.action, 'e.data', e.data
         mediator.publish(e.data.action, e.data)
 
   sendMessage: (data)->
