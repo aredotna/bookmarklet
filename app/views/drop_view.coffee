@@ -9,7 +9,8 @@ config = require 'config'
 module.exports = class DropView extends View
   template: template
   id: 'drop-content'
-
+  autoRender: yes
+  
   events:
     "click .page-scrape" : "postLink"
     "click .block-close" : "reset"
@@ -26,7 +27,7 @@ module.exports = class DropView extends View
     @createBlock(data)
     #Bookmarklet.metrics.trigger('bookmark', "Block", 'Save page')
 
-  handleDrop: (data) ->
+  handleDrop: (data, a, b) ->
     $html = $(data.value['text/html'])
     src   = $html.find('img').attr('src')
     src   = $html.first().next().attr('src')  if not src
