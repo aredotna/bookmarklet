@@ -45,6 +45,7 @@
     }
 
     #drop-zone {
+      @include transition(.4s);
       @include border-box;
       height: 100%;
       position: relative;
@@ -102,7 +103,6 @@
 
     #drop-zone.success, 
     #drop-zone.error {
-      @include transition(.4s);
       background-image: none;
 
       .status {
