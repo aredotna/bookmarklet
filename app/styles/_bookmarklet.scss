@@ -15,10 +15,7 @@
 
   .close-marklet {
     position: absolute;
-    color: white;
-    text-shadow: -1px -1px black;
-    top: 0;
-    @include opacity(20);
+    top: 1px;
     right: 5px;
   }
 
@@ -26,7 +23,7 @@
     width: 100%;
     position: static;
     padding-top: 18px;
-    background-color: $grey-4;
+    background-color: $grey-9;
     list-style: none;
     .dropdown-menu {
       top: 55px;
@@ -67,7 +64,7 @@
       .instructions {
         text-align: center;
         list-style: disc;
-        color: $grey-8;
+        color: $grey-7;
         font-size: 16px;
         line-height: 22px;
         margin: 22px;
