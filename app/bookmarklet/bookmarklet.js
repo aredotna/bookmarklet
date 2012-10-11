@@ -1,4 +1,5 @@
 (function () {
+  var host = "http://localhost:3332";
   if (!document.getElementById("arena")) {
 
     var arena_frame;
@@ -21,7 +22,7 @@
     function createFrame(){
       arena_frame = document.createElement("iframe");
       arena_frame.name = arena_frame.id = "arena_frame";
-      arena_frame.src = "http://are.na/bookmarklet";
+      arena_frame.src = host;
       document.body.appendChild(arena_frame);
     }
 
@@ -131,8 +132,8 @@
 
 
     // Close Arena
-
-    function checkForClose(){
+    
+    function checkForClose(e){
       if (e || window.event) {
         e = window.event;
         if (e.keyCode == 27) arena_close()
@@ -166,6 +167,14 @@
         case "bookmarklet:ready":
           sendLocation();
           break;
+
+        case "getselection":
+          var text = getSelectedText();
+          sendMessage({
+            action: "selectedtext",
+            value: text
+          })
+          break;
       }
     }
 
@@ -180,7 +189,17 @@
       })
     }
 
-
+    function getSelection(){
+      var text;
+      if (window.getSelection){
+        text = window.getSelection().toString();
+      } else if (document.getSelection) {
+        text = document.getSelection().toString()
+      } else if (document.selection) {
+        text = document.selection.createRange().text;
+      }
+      return text;
+    }
 
     // Utility
 
