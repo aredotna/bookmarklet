@@ -21,7 +21,7 @@ module.exports = class DropView extends View
 
   postLink: ->
     data =
-      source: mediator.source || document.referrer
+      source: mediator.source.url || document.referrer
       type: "Block"
     
     @createBlock(data)

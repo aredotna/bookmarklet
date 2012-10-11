@@ -28,7 +28,9 @@ module.exports = class Application extends Chaplin.Application
     @ready()
 
   setSource: (data)->
-    mediator.source = data.value
+    mediator.source = 
+      url: data.url
+      title: data.title
 
   initLayout: ->
     @layout = new Layout {@title}
@@ -37,7 +39,7 @@ module.exports = class Application extends Chaplin.Application
     Chaplin.mediator.user = new User
     Chaplin.mediator.channel = null
     Chaplin.mediator.storage = new Storage
-    Chaplin.mediator.source = ''
+    Chaplin.mediator.source = {}
     Chaplin.mediator.seal()
 
   initControllers: ->

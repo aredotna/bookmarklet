@@ -187,8 +187,11 @@
     function sendLocation(){
       sendMessage({
         action:"location",
-        value: window.location.href
-      })
+        value: {
+          url: window.location.href,
+          title: document.title
+        }
+      });
     }
 
     function sendClick(){
