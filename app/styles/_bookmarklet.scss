@@ -17,10 +17,17 @@
     width: 100%;
     position: static;
     padding-top: 18px;
-  }
-
-  .sidebar {
     background-color: $grey-9;
+    list-style: none;
+    .dropdown-menu {
+      top: 55px;
+      max-height: 240px;
+      max-width: 230px;
+      overflow: auto;
+      a {
+        white-space: normal;
+      }
+    }
   }
 
   #drop {
@@ -50,6 +57,7 @@
         color: $grey-8;
         text-align: center;
         font-size: 16px;
+        line-height: 20px;
         width: 160px;
         margin: 78px auto 0px auto;
       }
