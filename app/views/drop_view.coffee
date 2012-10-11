@@ -18,15 +18,6 @@ module.exports = class DropView extends View
   initialize: (options) ->
     super
     @subscribeEvent 'drop', @handleDrop
-    @delegate "click", ".helpLink", @showHelp
-    @delegate "click", ".help .close-help", @hideHelp
-
-  showHelp: ->
-    console.log 'showing help'
-    @$('.help').show()
-
-  hideHelp: ->
-    @$('.help').hide()
 
   postLink: ->
     data =
