@@ -1,5 +1,5 @@
 (function () {
-  var host = "http://localhost:3332";
+  var host = "http://are.na/bookmarklet";
   if (!document.getElementById("arena")) {
 
     var arena_frame;
