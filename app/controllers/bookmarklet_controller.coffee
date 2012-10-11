@@ -3,6 +3,7 @@ ChannelCollection = require 'models/channel_collection'
 Channel = require 'models/channel'
 SidebarView = require 'views/sidebar_view'
 mediator = require 'mediator'
+config = require 'config'
 
 module.exports = class BookmarkletController extends Controller
 
@@ -12,6 +13,7 @@ module.exports = class BookmarkletController extends Controller
 
   start: ->
     @subscribeEvent 'login', @showInterface
+    @subscribeEvent 'action:newChannel', @newChannel
 
   showInterface: ->
     @view = new SidebarView
@@ -21,16 +23,16 @@ module.exports = class BookmarkletController extends Controller
   newChannel: (attributes) ->
     @model = new Channel attributes
 
-    $('#q').addClass('loading')
+    $('#channel-picker').addClass('loading')
 
     # true is true
     @model.save {true: true},
-      wait:true
+      wait: true
       success: (model) =>
-        link = new Link(model.attributes)
-        mediator.user.get('channels').unshift(link)
-        $('#q').removeClass('loading').val('')
-        mediator.publish 'sidebar:filter', value: ''
-        @redirectTo "/#{model.get('slug')}"
-      error: ->
+        link = new Channel(model.attributes)
+        mediator.user.get('links').unshift(link)
+        $('#channel-picker').removeClass('loading').val('')
+        mediator.publish "channel:activate", link
+      error: (e, a, d)->
+        debugger
         console.log 'erro?'
