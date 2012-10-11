@@ -13,6 +13,8 @@ module.exports = class ChannelSearchView extends CollectionView
   initialize: (options)->
     super
     @subscribeEvent "channel:activate", @setChannel
+    @subscribeEvent "click", @hideSearch
+    @delegate "click", "#channel-picker", @showUnlessEmpty
     @delegate "keyup", "#channel-picker", @search
 
   search: (e)->
@@ -24,6 +26,11 @@ module.exports = class ChannelSearchView extends CollectionView
       $(window).bind 'click', @hideSearch
     else 
       @$list.hide()
+
+  showUnlessEmpty: ->
+    unless $('#channel-picker').val() is ''
+      @search()
+      false
 
   hideSearch: =>
     $(window).unbind 'click', @hideSearch
@@ -42,9 +49,6 @@ module.exports = class ChannelSearchView extends CollectionView
 
   getView: (link)->
     new LinkView model: link
-
-  afterRender: ->
-    super
 
   applyFilter: (options) -> 
     @filter (model, position) -> 

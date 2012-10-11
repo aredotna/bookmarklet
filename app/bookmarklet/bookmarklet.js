@@ -1,5 +1,6 @@
 (function () {
-  var host = "http://are.na/bookmarklet";
+  //var host = "http://are.na/bookmarklet";
+  var host = "http://localhost:3332"
   if (!document.getElementById("arena")) {
 
     var arena_frame;
@@ -49,6 +50,7 @@
     function setHostEvents(){
       document.addEventListener('dragstart', startDrag, true);
       document.addEventListener('dragend', stopDrag, true);
+      document.addEventListener('mousedown', sendClick, true)
       document.onkeyup = checkForClose;
       window.addEventListener("message", getMessage);
     }
@@ -186,6 +188,12 @@
       sendMessage({
         action:"location",
         value: window.location.href
+      })
+    }
+
+    function sendClick(){
+      sendMessage({
+        action: "click"
       })
     }
 
