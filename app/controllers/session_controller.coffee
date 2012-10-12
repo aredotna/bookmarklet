@@ -8,7 +8,6 @@ module.exports = class SessionController extends Controller
   initialize: ->
     @subscribeEvent 'logout', @logout
     @subscribeEvent 'login:successful', @getSession
-    @subscribeEvent 'login:successful', @redirectHome
     @subscribeEvent 'login', @setupAjaxAuth
     @subscribeEvent 'login', @removeLoginView
     @getSession()
@@ -29,11 +28,7 @@ module.exports = class SessionController extends Controller
       container: $('.bookmarklet-content')
 
   publishLogin: ->
-    console.log 'logged in', mediator.user
     mediator.publish 'login', mediator.user
-
-  redirectHome: ->
-    @redirectTo "/"
 
   logout: ->
     @disposeUser()
