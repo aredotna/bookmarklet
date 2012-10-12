@@ -19,6 +19,9 @@ module.exports = class SessionController extends Controller
         success: (user, response) => 
           user.setLinks()
           @publishLogin()
+        error: =>
+          mediator.publish 'guest_user'
+          @requestLogin()         
     else
       mediator.publish 'guest_user'
       @requestLogin()
