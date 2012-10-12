@@ -44,13 +44,14 @@
       height: 200px;
     }
 
-    #drop-zone {
-      @include transition(.4s);
+    #drop-zone { 
       @include border-box;
+      @include transition(background-color .4s);
+
       height: 100%;
       position: relative;
       border: 4px solid $grey-9;
-      $shadow: inset 0px 0px 26px rgba(0, 0, 0, 0.3);
+      $shadow: inset 0px 0px 26px rgba(0, 0, 0, 0.2);
       @include box-shadow($shadow);
       @include border-radius(4px);
 
@@ -104,10 +105,9 @@
     #drop-zone.success, 
     #drop-zone.error {
       background-image: none;
-
       .status {
         @include sans-serif-font;
-        margin-top: 60px;
+        margin-top: 75px;
         text-align: center;
         color: $white;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;     
@@ -142,9 +142,6 @@
 
     #drop-zone.error {
       background-color: $mediumRed;
-      .block-status {
-        display: block;
-      }
       .block-close {
         display: block;
       }
