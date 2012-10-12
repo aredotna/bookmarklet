@@ -19,13 +19,14 @@ module.exports = class ChannelSearchView extends CollectionView
 
   search: (e)->
     query = $('#channel-picker').val()
-    mediator.publish 'sidebar:filter', value: query
-    @applyFilter value: query
-    if @visibleItems.length
-      @$list.show()
-      $(window).bind 'click', @hideSearch
-    else 
-      @$list.hide()
+    if query.length > 0
+      mediator.publish 'sidebar:filter', value: query
+      @applyFilter value: query
+      if @visibleItems.length
+        @$list.show()
+        $(window).bind 'click', @hideSearch
+      else 
+        @$list.hide()
 
   showUnlessEmpty: ->
     unless $('#channel-picker').val() is ''
