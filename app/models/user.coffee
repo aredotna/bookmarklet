@@ -26,7 +26,7 @@ module.exports = class User extends Model
       params: ''
       value: ''
       sorter: 1
-      meta: 'or press Enter'
+      #meta: 'or press Enter'
       class: 'link-search sidebar-item-action'
       id: 'link-search'
 
@@ -37,7 +37,7 @@ module.exports = class User extends Model
       params: 'public'
       value: ''
       sorter: 2
-      meta: 'or press Alt+Enter'
+      #meta: 'or press Alt+Enter'
       class: 'link-create-public sidebar-item-action'
       id: 'link-create-public'
 
@@ -48,7 +48,7 @@ module.exports = class User extends Model
       params: 'private'
       value: ''
       sorter: 3
-      meta: 'or press Alt+Shift+Enter'
+      #meta: 'or press Alt+Shift+Enter'
       class: 'link-create-private sidebar-item-action'
       id: 'link-create-private'
 

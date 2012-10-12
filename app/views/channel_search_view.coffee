@@ -15,7 +15,51 @@ module.exports = class ChannelSearchView extends CollectionView
     @subscribeEvent "channel:activate", @setChannel
     @subscribeEvent "click", @hideSearch
     @delegate "click", "#channel-picker", @showUnlessEmpty
-    @delegate "keyup", "#channel-picker", @search
+    @delegate "keyup", "#channel-picker", @keyup
+
+  keyup: (e)->
+    if _.include [38, 40], e.keyCode
+      @setHighlight(e)
+    else if e.keyCode is 13
+      @setItemFromEnter(e)
+    else
+      @search(e)
+
+  setHighlight: (e) ->
+    $visible = @$('li:visible')
+    highlighted = @$('li:visible.highlight')
+    highlighted.removeClass('highlight')
+    if highlighted[0]
+      startEl = highlighted[0]
+      index = @$("li:visible").index(startEl)
+      length = $visible.length
+      if e.keyCode is 40
+        nextindex = if (index+1) > (length-1) then 0 else index+1
+      else if e.keyCode is 38 
+        nextindex = if (index-1) < 0 then length-1 else index-1
+
+      next = $visible[nextindex]
+    else
+      next = $visible[0]
+
+    $(next).addClass('highlight')
+    @scrollCheck()
+
+  setItemFromEnter: (e)->
+    item = @$('.highlight').find('.sidebar-item')
+    id = item.data('id')
+    model = @collection.get(id)
+    if model
+      view = @viewsByCid[model.cid]
+      view.activateLink(e)
+
+
+  scrollCheck: ->
+    listScroll = @$('.typeahead').scrollTop()
+    listHeight = @$('.typeahead').height()
+    itemHeight = @$('li.highlight').height()
+    itemTop = @$('li.highlight').position().top
+    @$('.typeahead').scrollTop(itemTop + itemHeight - listHeight + listScroll)
 
   search: (e)->
     query = $('#channel-picker').val()
@@ -63,12 +107,3 @@ module.exports = class ChannelSearchView extends CollectionView
         pattern = new RegExp(options.value, "gi")
         value = if model.has('username') then model.get('username') else model.get('title')
         pattern.test(value) or model.has('action')
-
-  activateLink: (e) ->
-    if @model.has('action')
-      e.preventDefault()
-      e.stopPropagation()
-      mediator.publish "action:#{@model.get('action')}", {status: @model.get('params'), title: @model.get('value')}
-
-    $('li:visible.highlight').removeClass 'highlight'
-    @$el.addClass('highlight')
