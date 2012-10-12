@@ -4,6 +4,31 @@
 ::-moz-selection { background: $blue-10; color: $white; text-shadow: none; }
 ::selection { background: $blue-10; color: $white; text-shadow: none; }
 
+
+.bookmarklet #login {
+  @include border-box; 
+  margin-top: 18px;
+  padding: 10px;
+  overflow-y: auto;
+  .logo {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+  .btn {
+    @include gradientBar($blue-4, $blue-3);
+  }
+  .forgot a {
+    font-size: 11px;
+    color: $grey-6;
+  }
+  .close-marklet {
+    position: fixed;
+    top: 1px;
+    right: 5px;
+  }
+}
+
 #bookmarklet {
   @include border-box;
   z-index: 1000;
@@ -12,12 +37,6 @@
   background: #fff;
   border-top: 4px solid $grey-10;
   border-width: 0px 0 0 0;
-
-  .close-marklet {
-    position: absolute;
-    top: 1px;
-    right: 5px;
-  }
 
   #sidebar {
     width: 100%;
@@ -34,7 +53,11 @@
         white-space: normal;
       }
     }
-
+    .close-marklet {
+      position: absolute;
+      top: 1px;
+      right: 5px;
+    }
   }
 
   #drop {

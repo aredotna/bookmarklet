@@ -25,7 +25,6 @@ module.exports = class SessionController extends Controller
 
   requestLogin: ->
     @view = new LoginView
-      container: $('.bookmarklet-content')
 
   publishLogin: ->
     mediator.publish 'login', mediator.user

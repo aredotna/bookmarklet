@@ -6,10 +6,14 @@ mediator = require 'mediator'
 module.exports = class LoginView extends View
   template: template
   autoRender: true
+  container: '.login-container'
+  attributes:
+    id: "login"
 
   events: 
     "click input[type=submit]" : "submitLogin"
     "keypress" : "checkForSubmit"
+    "click .close-marklet": "closeWindow"
 
   checkForSubmit: (e)->
     if e.keycode is 13
@@ -32,3 +36,5 @@ module.exports = class LoginView extends View
         mediator.publish 'login:failure'
     false
 
+  closeWindow: (e) ->
+    mediator.publish 'message:send', action: "close"
