@@ -50,6 +50,10 @@ module.exports = class ChannelSearchView extends CollectionView
   getView: (channel)->
     new LinkView model: channel
 
+  afterRender: ->
+    super
+    @$('#channel-picker').focus()
+
   applyFilter: (options) -> 
     @filter (model, position) -> 
       if options.value is ""
