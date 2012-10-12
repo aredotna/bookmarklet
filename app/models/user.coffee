@@ -1,5 +1,5 @@
 ChannelCollection = require 'models/channel_collection'
-Link = require 'models/channel'
+Channel = require 'models/channel'
 Model = require 'models/base/model'
 mediator = require 'mediator'
 config = require 'config'
@@ -19,7 +19,7 @@ module.exports = class User extends Model
   actionLinks: ->
     actions = []
 
-    search = new Link
+    search = new Channel
       title: 'Search for '
       visible: false
       action: 'search'
@@ -30,7 +30,7 @@ module.exports = class User extends Model
       class: 'link-search sidebar-item-action'
       id: 'link-search'
 
-    public_channel = new Link
+    public_channel = new Channel
       title: 'Create a public channel called '
       visible: false
       action: 'newChannel'
@@ -41,7 +41,7 @@ module.exports = class User extends Model
       class: 'link-create-public sidebar-item-action'
       id: 'link-create-public'
 
-    private_channel = new Link
+    private_channel = new Channel
       title: 'Create a private channel called '
       visible: false
       action: 'newChannel'

@@ -1,6 +1,6 @@
 CollectionView = require 'views/base/collection_view'
 LinkView = require 'views/link_view'
-Link = require 'models/channel'
+Channel = require 'models/channel'
 template = require 'templates/search'
 mediator = require 'mediator'
 
@@ -47,8 +47,8 @@ module.exports = class ChannelSearchView extends CollectionView
     curItem = this.collection.where({slug:mediator.channel?.model?.id})[0]
     curItem?.set('is_in_use', true)
 
-  getView: (link)->
-    new LinkView model: link
+  getView: (channel)->
+    new LinkView model: channel
 
   applyFilter: (options) -> 
     @filter (model, position) -> 
