@@ -21,12 +21,14 @@ module.exports = class LoginView extends View
     $.ajax
       type: 'POST'
       url: "#{config.api.versionRoot}/tokens"
+      dataType: "json"
       data:
         email: @$('#session_email').val()
         password: @$('#session_password').val()
       success: (data) ->
         mediator.storage.setToken data.token
         mediator.publish 'login:successful'
-      error: -> mediator.publish 'login:failure'
+      error: -> 
+        mediator.publish 'login:failure'
     false
 
