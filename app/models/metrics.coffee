@@ -27,10 +27,3 @@ module.exports = class Metrics extends Model
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
-
-  slideBlock: (direction, id) ->
-    mixpanel.track "Block slideshow", 
-      name:           mediator.user.get 'username'
-      id:             mediator.user.id
-      current_block:  id
-      direction:      direction
