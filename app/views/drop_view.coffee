@@ -45,7 +45,8 @@ module.exports = class DropView extends View
         source: src
 
     data.type = type
-    #Bookmarklet.metrics.trigger('bookmark', type, 'Drop item')
+
+    mediator.publish 'block:created', {type: type}
     @createBlock(data)
     
   setLoading: ->   @$('#drop-zone').addClass('loading')

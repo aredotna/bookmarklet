@@ -8,6 +8,7 @@ module.exports = class Metrics extends Model
 
     @subscribeEvent 'login', @login
     @subscribeEvent 'channel:change', @changeChannel
+    @subscribeEvent 'block:created', @blockCreated
 
   login: ->
     mixpanel.identify mediator.user.id
@@ -34,3 +35,13 @@ module.exports = class Metrics extends Model
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
+      title:          mediator.channel.model.get('title')
+
+
+  blockCreated: (params) ->
+    mixpanel.track "Bookmarklet / Block created", 
+      name:           mediator.user.get 'username'
+      id:             mediator.user.id
+      email:          mediator.user.get 'email' 
+      title:          mediator.channel.model.get('title')
+      type:           params?.type
