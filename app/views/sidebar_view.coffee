@@ -1,5 +1,7 @@
 View = require 'views/base/view'
 DropView = require 'views/drop_view'
+ChannelSearchView = require 'views/channel_search_view'
+CurrentChannelView = require 'views/current_channel_view'
 template = require 'templates/sidebar'
 mediator = require 'mediator'
 
@@ -7,23 +9,15 @@ mediator = require 'mediator'
 module.exports = class SidebarView extends View
   template: template
   id: "content"
-  autoRender: false
-
-  initialize: (options) ->
-    console.log 'this is a SidebarView', @
-    super
-    @resetChannel()
-    @subscribeEvent 'channel:change', @render
-    @render()
-
-  getTemplateData: ->
-    current_channel: mediator.channel.toJSON()
+  autoRender: yes
 
   events:
-    'click .close' : 'closeWindow'
+    'click .close-marklet' : 'closeWindow'
 
-  closeWindow: (e) ->
-    mediator.publish 'message:send', action: "close"
+  initialize: (options) ->
+    super
+    @subscribeEvent 'channel:change', @showCurrentChannel
+    @resetChannel()
 
   resetChannel: ->
     # fail-safe in case channel title is changed
@@ -34,20 +28,10 @@ module.exports = class SidebarView extends View
       channel = _.first @collection.where(title: mediator.user.get('user').username) 
 
     if !channel 
-        channel = @collection.first()
+      channel = @collection.first()
 
     if channel 
       @setChannel(channel.get('title'))
-
-  setup: ->
-    @$('#channel-picker').typeahead
-      source: @collection.pluck('title')
-      items: 3
-      onselect: (title) => @setChannel(title)
-
-    @dropzone?.dispose()
-    @dropzone = new DropView(model: mediator.channel)
-    @$('#drop').html(@dropzone.render().$el)
 
   setChannel: (title)->
     mediator.channel = _.first @collection.where(title: title)
@@ -55,6 +39,32 @@ module.exports = class SidebarView extends View
 
     mediator.publish('channel:change')
 
+  showCurrentChannel: ->
+    @subview 'current', new CurrentChannelView
+      model: mediator.channel
+
+  getTemplateData: ->
+    current_channel: mediator.channel.toJSON()
+
   afterRender: ->
     super
-    @setup()
+    @renderSubviews()
+
+  renderSubviews: ->
+    unless @renderedSubviews
+
+      @subview 'current', new CurrentChannelView
+        model: mediator.channel
+
+      @subview 'search', new ChannelSearchView
+        collection: @collection
+
+      @subview 'drop', new DropView
+        model: mediator.channel
+        container: "#drop"
+
+      @renderedSubviews = yes
+
+  closeWindow: (e) ->
+    mediator.publish 'message:send', action: "close"
+

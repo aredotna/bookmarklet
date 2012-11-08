@@ -7,6 +7,3 @@ mediator = require 'mediator'
 module.exports = class ChannelCollection extends Collection
 
   model: Channel
-
-  initialize: ->
-    @add mediator.user.get 'channels'

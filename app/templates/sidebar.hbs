@@ -1,21 +1,6 @@
 <div id="sidebar" class="sidebar">
-  <input type="text" id="channel-picker" class="search-query" data-provide="typeahead" placeholder="Select a channel">
-
-  <div class="sidebar-item active">
-    <a class="fill area" href="http://are.na/#/{{current_channel.slug}}" target="_blank">
-      <span class='item-title'>
-        <span class="title">{{current_channel.title}}</span>
-
-        <span class="{{get_state_lowercase current_channel.published current_channel.open}} state-dot"></span>
-      </span>
-
-      <span class='item-meta'>
-        <span class="state">{{get_state current_channel.published current_channel.open}}</span>
-        {{#if current_channel.collaboration}}<span class="collaboration">Collaboration</span>{{/if}}
-        {{#if_profile current_channel}}<span class="profile">Profile</span>{{/if_profile}}
-      </span>
-    </a>
-  </div>
+  <div class="channelsearch-container"></div>
+  <div class="currentchannel-container"></div>
 </div>
 
 <div id="drop" class="drop"></div>

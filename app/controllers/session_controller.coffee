@@ -8,7 +8,6 @@ module.exports = class SessionController extends Controller
   initialize: ->
     @subscribeEvent 'logout', @logout
     @subscribeEvent 'login:successful', @getSession
-    @subscribeEvent 'login:successful', @redirectHome
     @subscribeEvent 'login', @setupAjaxAuth
     @subscribeEvent 'login', @removeLoginView
     @getSession()
@@ -17,21 +16,21 @@ module.exports = class SessionController extends Controller
     if mediator.storage.has 'accessToken'
       @setupAjaxAuth()
       mediator.user.fetch
-        success: (model, response) => @publishLogin()
+        success: (user, response) => 
+          user.setLinks()
+          @publishLogin()
+        error: =>
+          mediator.publish 'guest_user'
+          @requestLogin()         
     else
       mediator.publish 'guest_user'
       @requestLogin()
 
   requestLogin: ->
     @view = new LoginView
-      container: $('.bookmarklet-content')
 
   publishLogin: ->
-    console.log 'logged in', mediator.user
     mediator.publish 'login', mediator.user
-
-  redirectHome: ->
-    @redirectTo "/"
 
   logout: ->
     @disposeUser()

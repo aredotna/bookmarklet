@@ -1,0 +1,74 @@
+<div 
+  class="sidebar-item
+    {{#if is_updated}}updated{{/if}}
+    {{#if is_in_use}}active{{/if}}
+    {{downcase class}}
+    {{downcase base_class}}"
+
+  data-id='{{#if_equals class "User"}}{{profile_id}}{{else}}{{id}}{{/if_equals}}'
+  data-slug="{{generated_slug}}"
+  data-type="{{#if_equals class "User"}}Channel{{else}}{{asset_type}}{{/if_equals}}"
+  {{#if action}}data-action="{{action}}"{{/if}}>
+
+  <a
+    href="/{{generated_slug}}"
+    class="fill area"
+    {{#if_block base_class}}
+      data-content-id="{{id}}_content"
+    {{else}}
+      data-type="Channel"
+    {{/if_block}}>
+    
+    <span class='item-title'>
+      <span class='title'>
+        {{#if title}}{{title}}{{else}}{{display_title}}{{/if}}{{#if value}}'{{value}}'{{/if}}
+      </span>
+
+      {{#if_channel class}}
+        <span class="{{status}} state-dot"></span>
+      {{/if_channel}}
+      
+    </span>
+    
+    <span class='item-meta'>
+      {{#if meta}}
+        {{meta}}
+      {{else}}
+        {{#if_channel class}}
+          {{display_following_tag}}
+          {{#if is_updated}}<span class="updated">Updated</span>{{/if}}
+          <span class="state">{{status}}</span>
+          {{#if collaboration}}<span class="collaboration">Collaboration</span>{{/if}}
+        {{/if_channel}}
+
+        {{#if_block base_class}}
+          <div class="hide" id="{{id}}_content">{{> preview}}</div>
+          <span class="block">{{block_type}}</span>
+        {{/if_block}}
+      {{/if}}
+    </span>
+  </a>
+
+  {{#if_current_user_profile}}
+
+    <div class="btn-group square sidebar-item-settings">
+
+      <div class="notifications-alert">
+      </div>
+
+      <a href="#" class="btn square mini outline dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </a>
+
+      <ul class="dropdown-menu">
+        <li><a id="account-settings" href="#">Settings</a></li>
+        <li><a href="/tools">Install bookmarklet</a></li>
+        <li><a id="new-invitation" href="#">Invite a friend</a></li>
+        <li><a href="/contacts">Find friends</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  {{/if_current_user_profile}}
+
+  <div class="handle grip"></div>
+</div>
