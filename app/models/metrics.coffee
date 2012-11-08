@@ -7,6 +7,7 @@ module.exports = class Metrics extends Model
     super
 
     @subscribeEvent 'login', @login
+    @subscribeEvent 'channel:change', @changeChannel
 
   login: ->
     mixpanel.identify mediator.user.id
@@ -23,7 +24,13 @@ module.exports = class Metrics extends Model
 
     mixpanel.name_tag mediator.user.get 'username'
 
-    mixpanel.track "Login", 
+    mixpanel.track "Bookmarklet / Login", 
+      name:           mediator.user.get 'username'
+      id:             mediator.user.id
+      email:          mediator.user.get 'email' 
+
+  changeChannel: ->
+    mixpanel.track "Bookmarklet / Switch channel", 
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
