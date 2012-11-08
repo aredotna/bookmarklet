@@ -4,6 +4,7 @@ routes = require 'routes'
 SessionController = require 'controllers/session_controller'
 BookmarkletController = require 'controllers/bookmarklet_controller'
 Storage = require 'models/storage'
+Metrics = require 'models/metrics'
 Layout = require 'views/layout'
 User = require 'models/user'
 
@@ -21,9 +22,11 @@ module.exports = class Application extends Chaplin.Application
     @initRouter routes
     Object.freeze? this
 
+    @initMetrics()
+
     @propagateEvents()
     mediator.on 'location', @setSource
-    mediator.on  'message:send', @sendMessage
+    mediator.on 'message:send', @sendMessage
 
     @ready()
 
@@ -55,3 +58,6 @@ module.exports = class Application extends Chaplin.Application
 
   ready: ->
     @sendMessage action: 'bookmarklet:ready'
+
+  initMetrics: ->
+    @metrics = new Metrics
