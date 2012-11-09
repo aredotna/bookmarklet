@@ -35,7 +35,7 @@ module.exports = class Metrics extends Model
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
-      title:          mediator.channel.model.get('title')
+      title:          mediator.channel.get('title')
 
 
   blockCreated: (params) ->
@@ -43,5 +43,5 @@ module.exports = class Metrics extends Model
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
-      title:          mediator.channel.model.get('title')
+      title:          mediator.channel.get('title')
       type:           params?.type
