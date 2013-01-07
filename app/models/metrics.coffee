@@ -7,7 +7,7 @@ module.exports = class Metrics extends Model
     super
 
     @subscribeEvent 'login', @login
-    @subscribeEvent 'channel:change', @changeChannel
+    @subscribeEvent 'channel:activate', @changeChannel
     @subscribeEvent 'block:created', @blockCreated
 
   login: ->
