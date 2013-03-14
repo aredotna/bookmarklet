@@ -3,6 +3,8 @@ LinkView = require 'views/link_view'
 Channel = require 'models/channel'
 template = require 'templates/search'
 mediator = require 'mediator'
+config = require 'config'
+
 
 module.exports = class ChannelSearchView extends CollectionView
   
@@ -62,15 +64,18 @@ module.exports = class ChannelSearchView extends CollectionView
     @$('.typeahead').scrollTop(itemTop + itemHeight - listHeight + listScroll)
 
   search: (e)->
-    query = $('#channel-picker').val()
-    if query.length > 0
-      mediator.publish 'sidebar:filter', value: query
-      @applyFilter value: query
-      if @visibleItems.length
-        @$list.show()
-        $(window).bind 'click', @hideSearch
-      else 
-        @$list.hide()
+    query = $.trim $('#channel-picker').val()
+    if query.length
+      $.get config.api.versionRoot + '/search/channels?q=' + query, (data) =>
+        @collection.reset(data.channels)
+        @applyFilter value: query
+        if @visibleItems.length
+          @$list.show()
+          $(window).bind 'click', @hideSearch
+        else 
+          @$list.hide()
+    else 
+      @$list.hide()
 
   showUnlessEmpty: ->
     unless $('#channel-picker').val() is ''
