@@ -85,7 +85,7 @@ module.exports = class DropView extends View
     @timedReset()
     
   render: =>
-    @$el.html @template(@model.toJSON())
+    @$el.html @template(@model?.toJSON())
     return this
 
   timedReset: =>

@@ -46,8 +46,8 @@ module.exports = class Application extends Chaplin.Application
     Chaplin.mediator.seal()
 
   initControllers: ->
-    new SessionController()
     new BookmarkletController()
+    new SessionController()
 
   propagateEvents: ->
     window.addEventListener 'message', (e) ->

@@ -17,7 +17,7 @@ module.exports = class BookmarkletController extends Controller
 
   showInterface: ->
     @view = new SidebarView
-      collection: mediator.user.get 'links'
+      collection: new ChannelCollection
       container: $('.bookmarklet-content')
 
   newChannel: (attributes) ->

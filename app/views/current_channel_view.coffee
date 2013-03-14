@@ -6,7 +6,7 @@ module.exports = class CurrentChannelView extends LinkView
 
   initialize: ->
     super
-    @model.set('is_in_use', true)
+    @model?.set('is_in_use', true)
 
   activateLink: ->
     false

@@ -12,12 +12,12 @@ module.exports = class LinkView extends View
     super
 
   setValue: (data)->
-    if @model.has('action')
+    if @model?.has('action')
       @model.set('value', data.value) 
       @render()
 
   activateLink: (e) ->
-    if @model.has('action')
+    if @model?.has('action')
       e.preventDefault()
       e.stopPropagation()
       mediator.publish "action:#{@model.get('action')}", {status: @model.get('params'), title: @model.get('value')}
@@ -34,5 +34,5 @@ module.exports = class LinkView extends View
     @_hideActions()
 
   _hideActions: ->
-    if @model.has('action')
+    if @model?.has('action')
       @$el.hide()

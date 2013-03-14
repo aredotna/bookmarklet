@@ -15,13 +15,7 @@ module.exports = class SessionController extends Controller
   getSession: ->
     if mediator.storage.has 'accessToken'
       @setupAjaxAuth()
-      mediator.user.fetch
-        success: (user, response) => 
-          user.setLinks()
-          @publishLogin()
-        error: =>
-          mediator.publish 'guest_user'
-          @requestLogin()         
+      @publishLogin()  
     else
       mediator.publish 'guest_user'
       @requestLogin()

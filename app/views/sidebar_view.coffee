@@ -24,12 +24,6 @@ module.exports = class SidebarView extends View
     if mediator.storage.getItem("currentChannel")?
       channel = _.first @collection.where(title: mediator.storage.getItem "currentChannel")
 
-    if !channel
-      channel = _.first @collection.where(title: mediator.user.get('user').username) 
-
-    if !channel 
-      channel = @collection.first()
-
     if channel 
       @setChannel(channel.get('title'))
 
@@ -44,7 +38,7 @@ module.exports = class SidebarView extends View
       model: mediator.channel
 
   getTemplateData: ->
-    current_channel: mediator.channel.toJSON()
+    current_channel: mediator.channel?.toJSON()
 
   afterRender: ->
     super
