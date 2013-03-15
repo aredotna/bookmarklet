@@ -1,0 +1,303 @@
+@import "nib"
+@import "variables"
+@import "mixins"
+
+// WEBFONTS
+// --------
+@font-face {
+  font-family: 'DTLHaarlemmerDRegular';
+  src: url('fonts/dtlhaarlemmerd-webfont.eot');
+  src: url('fonts/dtlhaarlemmerd-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/dtlhaarlemmerd-webfont.woff') format('woff'),
+       url('fonts/dtlhaarlemmerd-webfont.ttf') format('truetype'),
+       url('fonts/dtlhaarlemmerd-webfont.svg#DTLHaarlemmerDRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.haarlemmer { font-family: 'DTLHaarlemmerDRegular'; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+}
+
+// BODY TEXT
+// ---------
+p {
+  margin-bottom: ($baseLineHeight / 2);
+  font-family: $baseFontFamily;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  
+  small {
+    font-size: ($baseFontSize - 2);
+    color: $lightGray;
+  }
+}
+
+// LINKS
+// --------
+.url {
+  word-wrap: break-word;
+  text-decoration: underline;
+}
+
+.small {
+  font-size: ($baseFontSize - 2);
+  line-height: ($baseLineHeight - 2);
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(255,255,255,.5);
+  margin: $gridGutterWidth auto;
+  text-align: center;
+}
+
+// HEADINGS
+// --------
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  color: #000;
+  text-rendering: optimizelegibility; // Fix the character spacing for headings
+  
+  small {
+    color: $lightGray;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  line-height: ($baseLineHeight * 2);
+
+  small {
+    font-size: 18px;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: ($baseLineHeight * 2);
+
+  small {
+    font-size: 18px;
+  }
+}
+
+h3 {
+  line-height: ($baseLineHeight * 1.5);
+  font-size: 18px;
+
+  small {
+    font-size: 14px;
+  }
+}
+
+h4, h5, h6 {
+  line-height: $baseLineHeight;
+}
+
+h4 {
+  font-size: 14px;
+
+  small {
+    font-size: 12px;
+  }
+}
+
+h5 {
+  font-size: 12px;
+}
+
+h6 {
+  font-size: 11px;
+  color: $lightGray;
+  text-transform: uppercase;
+}
+
+
+// LISTS
+// -----
+// Unordered and Ordered lists
+ul, ol {
+  margin: 0 0 ($baseLineHeight / 2) 25px;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li {
+  line-height: $baseLineHeight;
+}
+
+ul.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+// Description Lists
+dl {
+  margin-bottom: $baseLineHeight;
+}
+
+dt,
+dd {
+  line-height: $baseLineHeight;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: ($baseLineHeight / 2);
+}
+
+// MISC
+// ----
+
+// Horizontal rules
+hr {
+  margin: $baseLineHeight 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+
+  &.invisible {
+    border-color: transparent;
+  }
+}
+
+// Emphasis
+strong {
+  font-style: inherit;
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.muted {
+  color: $lightGray;
+}
+
+// Abbreviations and acronyms
+abbr {
+  font-size: 90%;
+  text-transform: uppercase;
+  border-bottom: 1px dotted #ddd;
+  cursor: help;
+}
+
+// Blockquotes
+blockquote {
+  padding-left: 5px;
+  margin-bottom: $baseLineHeight;
+  margin-left: 0;
+  border-left: 2px solid #eee;
+
+  p {
+    font-style: italic;
+    margin-bottom: ($baseLineHeight / 2);
+    shorthand-font(16px, 300, ($baseLineHeight * 1.25));
+  }
+
+  small {
+    display: block;
+    line-height: $baseLineHeight;
+    color: $lightGray;
+
+    &:before {
+      content: '\2014 \00A0';
+    }
+  }
+
+  // Float right with text-align: right
+  &.pull-right {
+    float: right;
+    padding-left: 0;
+    padding-right: 15px;
+    border-left: 0;
+    border-right: 5px solid #eee;
+
+    p,
+    small {
+      text-align: right;
+    }
+  }
+}
+
+// Addresses
+address {
+  display: block;
+  margin-bottom: $baseLineHeight;
+  line-height: $baseLineHeight;
+}
+
+// Inline and block code styles
+.proper-code,
+code,
+pre {
+  padding: 0 3px 2px;
+  monospace-font();
+  font-size: 12px;
+  color: #000;
+}
+
+.proper-code,
+code {
+  padding: 1px 3px;
+  background-color: $orange;
+}
+
+pre {
+  display: block;
+  padding: (($baseLineHeight - 1) / 2);
+  margin: 0 0 ($baseLineHeight / 2);
+  font-size: 12px;
+  line-height: $baseLineHeight;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  // Make prettyprint styles more spaced out for readability
+  &.prettyprint {
+    margin-bottom: $baseLineHeight;
+  }
+
+  // Account for some code outputs that place code tags in pre tags
+  code {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+// HELPERS
+// -------
+.capitalize { text-transform: capitalize; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+  
