@@ -1,5 +1,4 @@
 View = require 'views/base/view'
-template = require 'templates/drop'
 mediator = require 'mediator'
 Item = require 'models/item'
 ItemView = require 'views/item_view'
@@ -7,9 +6,7 @@ config = require 'config'
 
 
 module.exports = class DropView extends View
-  template: template
   id: 'drop-content'
-  autoRender: yes
   
   events:
     "click .page-scrape" : "postLink"

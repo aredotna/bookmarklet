@@ -1,0 +1,275 @@
+@import "nib"
+
+// UTILITY
+// -------
+// For image replacement
+// ---------------------
+ir() {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  *line-height: 0;
+
+  & br { display: none }
+}
+
+// Sizing shortcuts
+// ----------------
+size($height=5px, $width=5px) {
+  width: $width;
+  height: $height;
+}
+
+square($size=5px) {
+  size($size, $size);
+}
+
+// Placeholder text
+// ----------------
+placeholder($color=$placeHolderText) {
+  :-moz-placeholder {
+    color: $color;
+  }
+
+  ::-webkit-input-placeholder {
+    color: $color;
+  }
+}
+
+// Resize anything
+// ---------------
+resizable($direction=both) {
+  resize: $direction; // Options: horizontal, vertical, both
+  overflow: auto; // Safari fix
+}
+
+// Fill out parent element
+// -----------------------
+occupy-space() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// FONTS
+// -----
+shorthand-font($weight=normal, $size=14px, $lineHeight=20px) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+
+sans-serif-font($weight=normal, $size=14px, $lineHeight=20px) {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+  -webkit-font-smoothing: antialiased;
+}
+
+serif-font($weight=normal, $size=14px, $lineHeight=20px) {
+  font-family: "Georgia", Times New Roman, Times, serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+monospace-font($weight=normal, $size=12px, $lineHeight=20px) {
+  font-family: "Monaco", Courier New, monospace;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+
+// GRID SYSTEM
+// -----------
+// Site container
+// --------------
+fixed-container() {
+  width: $siteWidth;
+  margin-left: auto;
+  margin-right: auto;
+  clearfix();
+}
+
+// Columns and offseting
+// ---------------------
+columns($columns=1) {
+  width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1));
+}
+
+offset($columns=1) {
+  margin-left: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1)) + ($gridGutterWidth * 2);
+}
+
+// Necessary grid styles for every column to make them appear next to each other horizontally
+gridColumn() {
+  float: left;
+  margin-left: $gridGutterWidth;
+}
+
+// makeColumn can be used to mark any element (e.g., .content-primary) as a column without changing markup to .span something
+makeColumn($columnSpan=1) {
+  gridColumn();
+  columns($columnSpan);
+}
+
+hover-shadow($color=$hoverShadowColor)
+
+// BACKGROUNDS
+// -----------
+// Add an alphatransparency value to any background or border color (via Elyse Holladay)
+translucent-background($color=$white, $alpha=1) {
+  background-color: hsla(hue($color), saturation($color), lightness($color), $alpha);
+}
+
+translucent-border($color=$white, $alpha=1) {
+  border-color: hsla(hue($color), saturation($color), lightness($color), $alpha);
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+}
+
+// Gradient Bar Colors for buttons and alerts
+gradientBar($primaryColor, $secondaryColor) {
+  vertical-gradient($primaryColor, $secondaryColor);
+  border-color: $secondaryColor $secondaryColor darken($secondaryColor, 5%);
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 5%);
+}
+
+// Gradients
+horizontal-gradient($startColor=#555, $endColor=#333) {
+  background-color: $endColor;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(left, $startColor, $endColor);
+}
+
+vertical-gradient($startColor=#555, $endColor=#333) {
+  background-color: $endColor;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(top, $startColor, $endColor);
+}
+
+striped($color) {
+  stripes($color, darken($color, 5%), 40px)
+}
+
+stripes($light, $dark, frequency) {
+  // Doesn't use nib's linear gradient here due to it only supporting position names (top, right, bottom, left, center)
+  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, $dark), color-stop(0.25, $dark), color-stop(0.25, $light), color-stop(0.5, $light), color-stop(0.5, $dark), color-stop(0.75, $dark), color-stop(0.75, $light));
+  background-image: -webkit-linear-gradient(45deg, $light 25%, $dark 25%, $dark 50%, $light 50%, $light 75%, $dark 75%, $dark);
+  background-image: -moz-linear-gradient(45deg, $light 25%, $dark 25%, $dark 50%, $light 50%, $light 75%, $dark 75%, $dark);
+  background-image: -ms-linear-gradient(45deg, $light 25%, $dark 25%, $dark 50%, $light 50%, $light 75%, $dark 75%, $dark);
+  background-image: -o-linear-gradient(45deg, $light 25%, $dark 25%, $dark 50%, $light 50%, $light 75%, $dark 75%, $dark);
+  background-size: frequency frequency
+}
+
+loading($color=$grey-7) {
+  stripes($color, darken($color, 5%), 40px);
+  background-repeat: repeat;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+
+// COMPONENT MIXINS
+// ----------------
+// POPOVER ARROWS
+// --------------
+// For tipsies and popovers
+popoverArrow-top($arrowWidth=5px, $arrowColor=$black) {
+  bottom: 0;
+  left: 50%;
+  margin-left: -($arrowWidth);
+  border-left: $arrowWidth solid transparent;
+  border-right: $arrowWidth solid transparent;
+  border-top: $arrowWidth solid $arrowColor;
+}
+
+popoverArrow-left($arrowWidth=5px, $arrowColor=$black) {
+  top: 50%;
+  right: 0;
+  margin-top: -($arrowWidth);
+  border-top: $arrowWidth solid transparent;
+  border-bottom: $arrowWidth solid transparent;
+  border-left: $arrowWidth solid $arrowColor;
+}
+
+popoverArrow-bottom($arrowWidth=5px, $arrowColor=$black) {
+  top: 0;
+  left: 50%;
+  margin-left: -($arrowWidth);
+  border-left: $arrowWidth solid transparent;
+  border-right: $arrowWidth solid transparent;
+  border-bottom: $arrowWidth solid $arrowColor;
+}
+
+popoverArrow-right($arrowWidth=5px, $arrowColor=$black) {
+  top: 50%;
+  left: 0;
+  margin-top: -($arrowWidth);
+  border-top: $arrowWidth solid transparent;
+  border-bottom: $arrowWidth solid transparent;
+  border-right: $arrowWidth solid $arrowColor;
+}
+
+
+
+// Flexbox 
+display-box() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: box;
+}
+
+display-inline-box() {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-box;
+}
+
+box($orient=horizontal, $pack=center, $align=center) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+
+    -webkit-box-orient: $orient;
+       -moz-box-orient: $orient;
+            box-orient: $orient;
+
+    -webkit-box-pack: $pack;
+       -moz-box-pack: $pack;
+            box-pack: $pack;
+
+    -webkit-box-align: $align;
+       -moz-box-align: $align;
+            box-align: $align;
+}
+
+
+
+// VARIOUS
+// -------
+thumbnail-styling() {
+  border: 1px solid $grey-9;
+}
+
+thumbnail-styling_hover() {
+  border-color: $grey-8;
+}
+
+no-select() {
+  user-select: none;
+}
+
+
+
+

@@ -1,7 +1,6 @@
 CollectionView = require 'views/base/collection_view'
 LinkView = require 'views/link_view'
 Channel = require 'models/channel'
-template = require 'templates/search'
 mediator = require 'mediator'
 config = require 'config'
 
@@ -9,7 +8,6 @@ config = require 'config'
 module.exports = class ChannelSearchView extends CollectionView
   
   container: ".channelsearch-container"
-  template: template
   listSelector: '.dropdown-menu'
 
   initialize: (options)->
@@ -55,7 +53,6 @@ module.exports = class ChannelSearchView extends CollectionView
       view = @viewsByCid[model.cid]
       view.activateLink(e)
 
-
   scrollCheck: ->
     listScroll = @$('.typeahead').scrollTop()
     listHeight = @$('.typeahead').height()
@@ -66,7 +63,7 @@ module.exports = class ChannelSearchView extends CollectionView
   search: (e)->
     query = $.trim $('#channel-picker').val()
     if query.length
-      $.get config.api.versionRoot + '/search/channels?q=' + query, (data) =>
+      $.get config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
         @collection.reset(data.channels)
         @applyFilter value: query
         if @visibleItems.length
@@ -88,7 +85,7 @@ module.exports = class ChannelSearchView extends CollectionView
 
   setChannel: (e)->
     mediator.channel = e
-    mediator.storage.setItem "currentChannel", e.get('title')
+    mediator.storage.setItem "currentChannel", JSON.stringify(e.toJSON())
     @$list.hide()
     mediator.publish('channel:change')
     false

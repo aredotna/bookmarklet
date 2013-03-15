@@ -21,7 +21,6 @@ module.exports = class LoginView extends View
       false
 
   submitLogin: (e) ->
-    
     $.ajax
       type: 'POST'
       url: "#{config.api.versionRoot}/tokens"

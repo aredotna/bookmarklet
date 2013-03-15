@@ -1,7 +1,7 @@
 Controller = require 'controllers/base/controller'
 ChannelCollection = require 'models/channel_collection'
 Channel = require 'models/channel'
-SidebarView = require 'views/sidebar_view'
+BookmarkletView = require 'views/bookmarklet_view'
 mediator = require 'mediator'
 config = require 'config'
 
@@ -16,7 +16,7 @@ module.exports = class BookmarkletController extends Controller
     @subscribeEvent 'action:newChannel', @newChannel
 
   showInterface: ->
-    @view = new SidebarView
+    @view = new BookmarkletView
       collection: new ChannelCollection
       container: $('.bookmarklet-content')
 
@@ -33,6 +33,3 @@ module.exports = class BookmarkletController extends Controller
         mediator.user.get('links').unshift(link)
         $('#channel-picker').removeClass('loading').val('')
         mediator.publish "channel:activate", link
-      error: (e, a, d)->
-        debugger
-        console.log 'erro?'
