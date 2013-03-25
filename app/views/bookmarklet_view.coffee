@@ -12,11 +12,10 @@ module.exports = class BookmarkletView extends View
   id: "content"
   autoRender: yes
 
-  events:
-    'click .close-marklet' : 'closeWindow'
-
   initialize: (options) ->
     super
+    @delegate 'click', '.close-marklet', @closeWindow
+    @subscribeEvent 'channel:activate', @setChannel
     @subscribeEvent 'channel:change', @showCurrentChannel
     @resetChannel()
 
@@ -54,10 +53,11 @@ module.exports = class BookmarkletView extends View
 
       @subview 'search', new ChannelSearchView
         collection: @collection
+        el: @$('.search-container')
 
       @subview 'drop', new DropView
         model: mediator.channel
-        container: "#drop"
+        el: @$('.drop-zone-container')
 
       @renderedSubviews = yes
 
