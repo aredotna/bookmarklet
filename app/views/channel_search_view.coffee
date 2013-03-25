@@ -70,7 +70,7 @@ module.exports = class ChannelSearchView extends CollectionView
 
   processSearchResults: (data)->
     @collection.reset(data.channels)
-    # @applyFilter value: query
+
     if @visibleItems.length
       @$list.show()
       $(window).bind 'click', @hideSearch
@@ -103,12 +103,3 @@ module.exports = class ChannelSearchView extends CollectionView
   afterRender: ->
     super
     @$('#channel-picker').focus()
-
-  applyFilter: (options) -> 
-    @filter (model, position) -> 
-      if options.value is ""
-        if model.has('action') then false else true
-      else
-        pattern = new RegExp(options.value, "gi")
-        value = if model.has('username') then model.get('username') else model.get('title')
-        pattern.test(value) or model.has('action')
