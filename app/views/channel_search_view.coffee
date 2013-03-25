@@ -109,7 +109,7 @@ module.exports = class ChannelSearchView extends CollectionView
     @$('#channel-picker').focus()
 
   startLoad: ->
-    @$('.search-query').addClass('loading')
+    @$el.addClass('loading')
 
   endLoad: ->
-    @$('.search-query').removeClass('loading')
+    @$el.removeClass('loading')
