@@ -2,6 +2,7 @@
 
   <div class="search-container">
     <input type="text" id="channel-picker" class="search-query" placeholder="Select or create a channel">
+    <a class="new-channel-link"></a>
     <ul class="dropdown-menu"></ul>
   </div>
 
@@ -10,16 +11,23 @@
 </div>
 
 
-<div class="drop-zone-container">
+<div class="drop-zone-container ready">
   <div class="drop-zone">
 
     <div class="instructions">
       Drag images, links, or text here to save on Arena or simply <a class="save-as-page-link">Save page as link</a>
     </div>
 
-    <div class="status">
-      <div class="block-status">Block Created</div>
-      <a class="view-on-arena-link" target="_blank" href="http://are.na">View on Arena</a>
+    <div class="status-container error">
+      <div class="status-success">
+        <div class="block-status">Block Created</div>
+        <a class="view-on-arena-link" target="_blank" href="http://are.na">View on Arena</a>
+      </div>
+
+      <div class="status-error">
+        <div class="block-status">Unable to create block</div>
+        <!--<a class="view-on-arena-link" target="_blank" href="http://are.na">Something bad happened</a>-->
+      </div>
     </div>
 
   </div>

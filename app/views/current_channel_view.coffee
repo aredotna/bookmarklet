@@ -1,7 +1,7 @@
 LinkView = require 'views/link_view'
 
 module.exports = class CurrentChannelView extends LinkView
-  container: '.currentchannel-container'
+  container: '.current-channel-container'
   autoRender: yes
 
   initialize: ->

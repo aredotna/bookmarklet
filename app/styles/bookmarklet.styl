@@ -2,6 +2,320 @@
 @import "variables"
 @import "mixins"
 
+// DEFAULTS
+// --------
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $backgroundGray;
+  color: $darkTextColor;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+input {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  font: inherit;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0 !important;
+}
+
+li {
+  list-style: none;
+}
+
+placeholder(inherit);
+
+
+
+// MAIN
+// ----
+
+#bookmarklet {
+  width: 100%;
+  height: auto;
+}
+
+
+// SEARCH
+// ------
+
+.search-container {
+  background: rgb(226, 226, 226);
+  height: ($unit * 2);
+  padding-right: ($unit * 2);
+}
+
+.search-query {
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding-left: ($unit * 2);
+  border-right: 1px solid darken($borderColor, 5%);
+  background: no-repeat 14px center;
+  background-image: url('/images/interface/search-dark.png');
+  color: #4b4b4b;
+  font-weight: normal;
+  transition: background-color .125s
+
+  &:focus {
+    background-color: darken(rgb(226, 226, 226), 5%)
+    color: inherit;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background: $backgroundGray;
+}
+
+.new-channel-link {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: ($unit * 2);
+  height: ($unit * 2);
+  background: url('/images/interface/compose.png') center center no-repeat
+
+  &:hover {
+    background-color: darken(rgb(226, 226, 226), 5%)
+  }
+}
+
+
+// DROP ZONE
+// ---------
+
+.drop-zone-container {
+  box();
+  position: relative;
+  text-align: center;
+  height: 235px;
+
+  box-shadow: inset 0px 0px 15px rgba(0,0,0,.2);
+  font-size: 16px;
+  font-weight: normal;
+  background-color: white;
+  color: rgb(145, 145, 145);
+
+  &.ready {
+    .instructions { display: block; }
+    .status-container { display: none; }
+  }
+
+  &.complete {
+    .instructions { display: none; }
+    .status-container { display: block; }
+  }
+}
+
+.instructions {
+  padding: $unit;
+  line-height: 26px;
+}
+
+.save-as-page-link {
+  display: inline-block;
+  padding: 0px 4px;
+  color: white;
+  background-color: rgb(145, 145, 145);
+
+  &:hover {
+    color: white;
+    background-color: $activeColor;
+  }
+
+  &:active {
+    background-color: $activeColor;
+  }
+}
+
+.status-container {
+  box();
+  occupy-space();
+  color: white;
+
+  .block-status {
+    margin-bottom: ($unit / 2);
+  }
+
+  .view-on-arena-link {
+    padding: 3px 7px;
+    color: $droppableColor;
+    background-color: white;
+  }
+
+  &.success {
+    background-color: $droppableColor;
+
+    .status-success { display: block; }
+    .status-error { display: none; }
+  }
+
+  &.error {
+    background-color: $errorColor;
+
+    .status-success { display: none; }
+    .status-error { display: block; }    
+  }
+}
+
+// SIDEBAR LINK
+// ------------
+
+.sidebar-item {
+  position: relative;
+  line-height: 18px;
+  border-bottom: 1px solid darken(rgb(226, 226, 226), 5%);
+
+  .area {
+    display: block;
+    padding: 15px ($unit / 2);
+  }
+
+  &.user .area {
+    padding: ($unit / 2);
+  }
+
+  // SIDEBAR ITEM CONTENT
+  // --------------------
+  .item-title,
+  .item-meta { display: block; }
+
+  .item-title {
+    font-size: $baseFontSize;
+    font-weight: bold;
+    word-wrap: break-word;
+    color: $darkTextColor;
+    padding-right: ($unit / 2);
+
+    .username {
+      margin-left: ($unit / 2);
+      line-height: ($unit * 2);
+      vertical-align: middle;
+    }
+  }
+
+  .item-meta {
+    font-size: ($baseFontSize - 2);
+    line-height: ($baseLineHeight - 2);
+    font-weight: normal;
+    color: $lightTextColor;
+    
+    span { text-transform: lowercase; }
+  }
+
+  .item-meta-icons {
+    position: absolute;
+    display: block;
+    // top: 50%;
+    // right: 23px;
+    // height: 14px; // sprite-height
+    // margin-top: -9px; // visual offset
+    top: 15px;
+    right: 15px;
+
+    i { vertical-align: top; }
+  }
+
+  // DRAGGABLE INDICATOR
+  // -------------------
+  .handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: $unit;
+    visibility: hidden;
+    cursor: move;
+  }
+
+  // HOVER STATE
+  // -----------
+  &:hover {
+    background-color: darken($backgroundGray, 5%);
+    border-bottom: 1px solid $sidebarBorderColor;
+
+    .area { text-decoration: none; }
+
+    .item-title > .title,
+    .username { text-decoration: none; }
+
+    .handle { visibility: visible; }
+  }
+
+  // ACTIVE STATE
+  // ------------
+  &.active {
+    background-color: $activeColor !important;
+    border-bottom: 1px solid $activeColor;
+
+    .item-title { color: #fff; }
+    .item-meta { color: white; }
+    .item-timestamp { color: #adc6ee; }
+  }
+
+  // DROPPABLE INDICATION
+  // --------------------
+  &.droppable-hover {
+    background-color: $droppableColor;
+    
+    .item-title,
+    .item-meta { color: #fff; }
+  }
+
+  // CONNECTING DROP STATE
+  // ---------------------
+  &.drop-loading {
+    loading($droppableColor);
+
+    .item-title,
+    .item-meta { color: #fff; }
+  }
+
+  // LOADING STATE
+  // -------------
+  &.loading,
+  &.highlight.loading,
+  &.loading:hover,
+  &.highlight.loading:hover {
+    loading($droppableColor);
+
+    .item-title,
+    .item-meta { color: #fff; }
+  }
+}
+
 
 // LOGIN SCREEN
 // ------------
@@ -31,177 +345,4 @@
     top: 1px;
     right: 5px;
   }
-}
-
-
-// MAIN
-// ----
-
-#bookmarklet {
-  width: 100%;
-  height: auto;
-  background: #fff;
-
-  .close-marklet {
-    position: absolute;
-    top: 1px;
-    right: 5px;
-  }
-
-  #sidebar {
-    width: 100%;
-    position: static;
-    background-color: $backgroundGray;
-    list-style: none;
-
-    .search-query {
-      width: 100%;
-    }
-
-    placeholder($darkTextColor);
-
-    .dropdown-menu {
-      max-height: 240px;
-      max-width: none;
-      width: 100%;
-      overflow: auto;
-      border: 0;
-      padding: 0;
-      border: 1px solid $borderColor;
-      background: $backgroundGray;
-
-      a {
-        white-space: normal;
-      }
-
-      li:first-child .sidebar-item { border-top: 0; }
-      li:last-child .sidebar-item { border-bottom: 0; }
-
-    }
-  }
-
-  #drop {
-
-    #drop-content {
-      clearfix();
-      height: 270px;
-    }
-
-    #drop-zone { 
-      transition: background-color .4s;
-
-      height: 100%;
-      position: relative;
-      box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.2);
-
-      &.loading { 
-        loading($grey-9); 
-      }
-
-      .block-status,
-      .block-link,
-      .block-close {
-        display: none;
-      }
-
-      .instructions {
-        text-align: center;
-        list-style: disc;
-        color: $grey-7;
-        font-size: 16px;
-        line-height: 28px;
-        padding: 22px;
-        padding-top: 52px;
-      }
-
-      .help {
-        occupy-space();
-        display: none;
-        background-color: $grey-9;
-        color: $grey-7;
-        ul {
-          margin: 30px 10px;
-          padding: 0 0 0 20px;
-        }
-        .close-help {
-          position: absolute;
-          top: 0px;
-          right: 1px;
-        }
-      }
-
-      .helpLink {
-        position: absolute;
-        bottom: 5px;
-        right: 10px;
-        color: $grey-8;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-    }
-
-
-
-    #drop-zone.success, 
-    #drop-zone.error {
-      background-image: none;
-      .status {
-        margin-top: 75px;
-        text-align: center;
-        color: $white;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;     
-      }
-
-      .instructions{
-        display: none;
-      }
-
-      .block-status {
-        margin-top: $gridGutterWidth;
-        margin-bottom: 8px;
-        font-size: 15px;
-        font-weight: bold;
-        display: block;
-      }
-      .block-link,
-      .block-close {
-        font-size: 12px;
-        line-height: 15px;
-        color: white;
-      }
-    }
-
-    #drop-zone.success {
-      background-color: $green;
-      .block-link,
-      .block-close {
-        display: block;
-      }
-    }
-
-    #drop-zone.error {
-      background-color: $mediumRed;
-      .block-close {
-        display: block;
-      }
-    }
-
-    .save-as-page-link {
-      background-color: rgb(153, 153, 153);
-      color: white;
-      cursor: pointer;
-      display: inline-block;
-      padding: 0px 7px;
-      margin-left: 3px;
-
-      &:hover {
-        background-color: $activeColor;
-        text-decoration: none;
-      }
-    }
-  }
-
-
-  #item-container .template-upload { overflow: hidden; }
 }

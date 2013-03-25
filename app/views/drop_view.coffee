@@ -9,14 +9,16 @@ module.exports = class DropView extends View
   id: 'drop-content'
   
   events:
-    "click .page-scrape" : "postLink"
     "click .block-close" : "reset"
 
   initialize: (options) ->
     super
+    @delegate 'click', '.block-close', @reset
+    @delegate 'click', '.save-as-page-link', @postLink
     @subscribeEvent 'drop', @handleDrop
 
   postLink: ->
+    console.log 'posting link'
     data =
       source: mediator.source.url || document.referrer
       type: "Block"
@@ -55,7 +57,7 @@ module.exports = class DropView extends View
 
     itemview = new ItemView(model: item)
     @$('#item-container').append(itemview.render().$el)
-    itemview.runProgressBar()
+    # itemview.runProgressBar()
 
     @setLoading()
     

@@ -1,6 +1,6 @@
 (function () {
-  var host = "https://are.na/bookmarklet";
-  //var host = "http://localhost:3332"
+  // var host = "https://are.na/bookmarklet";
+  var host = "http://localhost:3333"
   var arena_frame;
   var arena_div;
 

@@ -28,7 +28,6 @@ module.exports = class LinkView extends View
     @$el.addClass('highlight')
     false
 
-
   afterRender: ->
     super
     @_hideActions()
