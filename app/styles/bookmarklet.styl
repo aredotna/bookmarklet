@@ -130,8 +130,8 @@ placeholder(inherit);
   right: 0;
   width: ($unit * 2);
   height: ($unit * 2);
-  background: url('/images/interface/compose.png') center center no-repeat
-
+  background: $backgroundGray url('/images/interface/compose.png') center center no-repeat
+ 
   &:hover {
     background-color: darken(rgb(226, 226, 226), 5%)
   }
@@ -460,6 +460,13 @@ placeholder(inherit);
     .item-title,
     .item-meta { color: #fff; }
   }
+}
+
+.highlight > .sidebar-item {
+  background-color: $highlightColor !important;
+  border-bottom: 1px solid $highlightColor;
+
+  .item-title, .item-meta { color: $highlightTextColor; }
 }
 
 .current-channel-container {
