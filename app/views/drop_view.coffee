@@ -18,7 +18,6 @@ module.exports = class DropView extends View
     @subscribeEvent 'drop', @handleDrop
 
   postLink: ->
-    console.log 'posting link'
     data =
       source: mediator.source.url || document.referrer
       type: "Block"
@@ -73,14 +72,14 @@ module.exports = class DropView extends View
     item.set(data)
     item.setURL()
     @unsetLoading()
-    @$('.block-status').html('Block created')
     @$('.block-link').attr('href', item.get('url'))
-    @$('#drop-zone').addClass('success').removeClass('loading error')
+    @$el.addClass('complete').removeClass('ready')
+    @$('.status-container').addClass('success')
     @timedReset()
 
   blockCreationFailed: =>
-    @$('.block-status').html('Could not create block')
-    @$('#drop-zone').addClass('error').removeClass('loading success')
+    @$el.addClass('complete').removeClass('ready')
+    @$('.status-container').addClass('error')
     @timedReset()
     
   render: =>
@@ -90,7 +89,8 @@ module.exports = class DropView extends View
   timedReset: =>
     window.setTimeout =>
       @reset()
-    , 2000
+    , 3000
 
   reset: ->
-    @$('#drop-zone').removeClass('success loading error');
+    @$el.addClass('ready').removeClass('complete')
+    @$('.status-container').removeClass('success error')

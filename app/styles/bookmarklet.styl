@@ -278,7 +278,9 @@ placeholder(inherit);
 
   &.complete {
     .instructions { display: none; }
-    .status-container { display: block; }
+    .status-container { 
+      box();
+    }
   }
 }
 
@@ -304,7 +306,7 @@ placeholder(inherit);
 }
 
 .status-container {
-  box();
+  display-box();
   occupy-space();
   color: white;
 
