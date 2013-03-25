@@ -10,7 +10,7 @@ module.exports = class ChannelSearchView extends CollectionView
   container: ".channelsearch-container"
   listSelector: '.dropdown-menu'
   animationDuration: 0
-  
+
   initialize: (options)->
     super
     @subscribeEvent "channel:activate", @setChannel
@@ -64,7 +64,10 @@ module.exports = class ChannelSearchView extends CollectionView
   search: (e)->
     query = $.trim $('#channel-picker').val()
     if query.length
-      $.get config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
+      @currentRequest?.abort()
+      @startLoad()
+      @currentRequest = $.get config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
+        @endLoad()
         @processSearchResults(data)
     else
       @$list.hide()
@@ -104,3 +107,9 @@ module.exports = class ChannelSearchView extends CollectionView
   afterRender: ->
     super
     @$('#channel-picker').focus()
+
+  startLoad: ->
+    @$('.search-query').addClass('loading')
+
+  endLoad: ->
+    @$('.search-query').removeClass('loading')
