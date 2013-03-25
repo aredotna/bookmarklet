@@ -46,7 +46,10 @@ module.exports = class NewChannelView extends View
   createChannel: (e) ->
     e.preventDefault()
 
+    return if @processing
     return unless @validate()
+
+    @processing = true
 
     attributes = 
       title: @getTitle()
@@ -58,9 +61,11 @@ module.exports = class NewChannelView extends View
         model.set("is_in_use", true)
         mediator.publish "channel:activate", model
         @hideCreateInterface()
+        @processing = false
 
       error: ->
         mediator.publish "error"
+        @processing = false
 
   validate: ->
     valid = $.trim(@model.get("title")) isnt ""
