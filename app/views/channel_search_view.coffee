@@ -64,14 +64,17 @@ module.exports = class ChannelSearchView extends CollectionView
     query = $.trim $('#channel-picker').val()
     if query.length
       $.get config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
-        @collection.reset(data.channels)
-        # @applyFilter value: query
-        if @visibleItems.length
-          @$list.show()
-          $(window).bind 'click', @hideSearch
-        else 
-          @$list.hide()
+        @processSearchResults(data)
     else
+      @$list.hide()
+
+  processSearchResults: (data)->
+    @collection.reset(data.channels)
+    # @applyFilter value: query
+    if @visibleItems.length
+      @$list.show()
+      $(window).bind 'click', @hideSearch
+    else 
       @$list.hide()
 
   showUnlessEmpty: ->
