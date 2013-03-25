@@ -31,7 +31,7 @@ module.exports = class Metrics extends Model
       email:          mediator.user.get 'email' 
 
   changeChannel: ->
-    mixpanel.track "Bookmarklet / Switch channel", 
+    _.defer -> mixpanel.track "Bookmarklet / Switch channel", 
       name:           mediator.user.get 'username'
       id:             mediator.user.id
       email:          mediator.user.get 'email' 
