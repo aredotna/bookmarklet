@@ -9,7 +9,8 @@ module.exports = class ChannelSearchView extends CollectionView
   
   container: ".channelsearch-container"
   listSelector: '.dropdown-menu'
-
+  animationDuration: 0
+  
   initialize: (options)->
     super
     @subscribeEvent "channel:activate", @setChannel
