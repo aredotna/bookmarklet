@@ -1,0 +1,27 @@
+<a href="#" class="new-channel-form-toggle">
+  <i class="interface-create-public"></i>
+</a>
+
+<div id="new-channel-form" class="new-channel-form-container hide">
+  <div id="new-channel-inner" class="new-channel-inner">
+    <div class="header">
+      New Channel
+    </div>
+    <form class="new-channel-settings">
+      <div class="new-channel-settings-options">
+        <div class="new-channel-settings-title">
+          <input type="text" class="channel-name full" placeholder="Channel Name" name="channel_name" value="{{title}}" autofocus>
+        </div>
+        <div class="new-channel-settings-state">
+          {{> channel_state}}
+        </div>
+      </div>
+
+      <input type="submit" value="Create channel" class="btn transparent outline full new-channel-settings-submit">
+    </form>
+    
+    <div class="channel-create-success"></div>
+  </div>
+
+  <div class="panel-close light">Close</div>
+</div>
