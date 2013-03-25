@@ -80,6 +80,11 @@ placeholder(inherit);
   height: ($unit * 2);
   padding-right: ($unit * 2);
 
+  &.loading {
+    loading(rgb(226, 226, 226));
+  }
+
+  placeholder(rgb(145, 145, 145));
 
   .search-query {
     display: block;
@@ -97,14 +102,10 @@ placeholder(inherit);
     box-shadow: none;
 
     &:focus {
-      background-color: darken(rgb(226, 226, 226), 5%)
       border-right: 1px solid darken($borderColor, 5%);
       color: inherit;
     }
 
-    &.loading {
-      loading(rgb(226, 226, 226));
-    }
   }
 
   .dropdown-menu {
@@ -237,20 +238,17 @@ placeholder(inherit);
   font-weight: bold;
   color: #fff;
   background-color: $grey-4;
-  box-shadow: inset 0 5px 5px -5px rgba(0,0,0,.5);
+  box-shadow: inset 0 5px 5px -5px rgba(0,0,0,.2);
   cursor: pointer;
-
-  &:hover {
-    background-color: lighten($grey-4, 5%);
-  }
 
   &.light {
     background-color: $grey-8;
     color: $textColor;
+  }
 
-    &:hover {
-      background-color: lighten($grey-8, 5%);
-    }
+  &:hover {
+    text-decoration: none;
+    background-color: lighten($grey-8, 15%);
   }
 }
 
@@ -301,6 +299,7 @@ placeholder(inherit);
   &:hover {
     color: white;
     background-color: $activeColor;
+    text-decoration: none;
   }
 
   &:active {
@@ -461,6 +460,10 @@ placeholder(inherit);
     .item-title,
     .item-meta { color: #fff; }
   }
+}
+
+.current-channel-container {
+  a { cursor: default; }
 }
 
 
