@@ -15,6 +15,7 @@ module.exports = class DropView extends View
     super
     @delegate 'click', '.block-close', @reset
     @delegate 'click', '.save-as-page-link', @postLink
+    @delegate 'click', '.status-container', @forceReset
     @subscribeEvent 'drop', @handleDrop
 
   postLink: ->
@@ -87,9 +88,15 @@ module.exports = class DropView extends View
     return this
 
   timedReset: =>
-    window.setTimeout =>
+    @resetTimer = window.setTimeout =>
       @reset()
     , 3000
+
+  forceReset: (e)->
+    return if $(e.currentTarget).is('a')
+
+    clearTimeout @resetTimer
+    @reset()
 
   reset: ->
     @$el.addClass('ready').removeClass('complete')

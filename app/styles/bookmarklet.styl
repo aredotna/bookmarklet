@@ -130,7 +130,7 @@ placeholder(inherit);
   right: 0;
   width: ($unit * 2);
   height: ($unit * 2);
-  background: $backgroundGray url('/images/interface/compose.png') center center no-repeat
+  background: rgb(226, 226, 226) url('/images/interface/compose.png') center center no-repeat
  
   &:hover {
     background-color: darken(rgb(226, 226, 226), 5%)
@@ -212,12 +212,10 @@ placeholder(inherit);
 
   .btn {
     width: 100%;
-
-    .caret { float: right; }
-    
     // copied from buttons.styl
     border: 1px solid rgba(0,0,0,0.075);
 
+    .caret { float: right; }
     &:hover { border-color: rgba(0,0,0,0.5); }
   }
 }
@@ -311,6 +309,7 @@ placeholder(inherit);
   display-box();
   occupy-space();
   color: white;
+  cursor: pointer;
 
   .block-status {
     margin-bottom: ($unit / 2);
