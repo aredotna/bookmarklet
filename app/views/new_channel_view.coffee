@@ -56,7 +56,6 @@ module.exports = class NewChannelView extends View
     channel.save null,
       success: (model) =>
         model.set("is_in_use", true)
-        mediator.user.channels.unshift(model.toJSON())
         mediator.publish "shortcut:activate", "userChannels"
         @hideCreateInterface()
 
