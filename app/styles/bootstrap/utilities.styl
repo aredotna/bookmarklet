@@ -1,0 +1,127 @@
+@import "nib"
+@import "../variables";
+@import "../mixins";
+
+// UTILITY CLASSES
+// ---------------
+
+// DISPLAY
+// -------
+.grip {
+  background: transparent url("../images/interface/grip.png");
+}
+
+.move { cursor: move; }
+
+// VERTICAL CENTERING (lightbox)
+// ------------------
+.panel-content-container {
+  display: table;
+  width: 100%;
+  height: 100%;
+
+  .panel-content {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    
+    .constrain { margin: $unit; }
+  }
+}
+
+// FLOATS
+// ------
+.pull-right { float: right; }
+
+.pull-left { float: left; }
+
+// VERTICAL SPACING
+// ----------------
+.push-up {
+  margin-top: ($unit / 2);
+
+  &.full { margin-top: $unit; }
+}
+
+.push-down {
+  margin-bottom: ($unit / 2);
+
+  &.full { margin-bottom: $unit; }
+}
+
+.push-both {
+  margin-top: ($unit / 2);
+  margin-bottom: ($unit / 2);
+
+  &.full {
+    margin-top: $unit;
+    margin-bottom: $unit;
+  }
+}
+
+// HORIZONTAL SPACING
+// ------------------
+.push-right {
+  margin-right: ($unit / 2);
+
+  &.full { margin-right: $unit; }
+}
+
+.push-left {
+  margin-left: ($unit / 2);
+
+  &.full { margin-left: $unit; }
+}
+
+.auto { margin: auto; }
+
+// QUICK ALIGNMENT
+// ---------------
+.align-right { text-align: right; }
+
+.align-left { text-align: left; }
+
+.align-center { text-align: center; }
+
+// TOGGLING CONTENT
+// ----------------
+.hide { display: none; }
+
+.show { display: block; }
+
+// VISIBILITY
+// ----------
+.invisible { visibility: hidden; }
+
+// IMAGE REPLACEMENT
+// -----------------
+.ir {
+  ir();
+}
+
+// CLEARFIX
+// --------
+.clearfix {
+  clearfix();
+}
+
+.meta-sep {
+  color: rgba(0,0,0,0.5);
+  margin: 0 2px;
+
+  &.inverse {
+    color: rgba(255,255,255,0.5);
+  }
+
+  &.invisible {
+    color: transparent;
+  }
+}
+
+.break-word { word-wrap: break-word; }
+
+// Fill container
+.occupy-space {
+  occupy-space();
+}

@@ -1,0 +1,144 @@
+@import "nib"
+@import "../variables"
+@import "../mixins"
+
+// DROPDOWN MENUS
+// --------------
+
+// Use the .menu class on any <li> element within the topbar or ul.tabs and you'll get some superfancy dropdowns
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Dropdown arrow/caret
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  text-indent: -99999px;
+  vertical-align: top;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000;
+  opacity: 0.3;
+  content: "\2193";
+}
+
+.dropdown .caret {
+  margin-top: 8px;
+  margin-left: 2px;
+  *margin-top: 7px;
+}
+
+.dropdown:hover .caret,
+.open.dropdown .caret {
+  opacity: 1;
+}
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  z-index: $zindexDropdown;
+  float: left;
+  display: none; // none by default, but block on "open" of the menu
+  min-width: 180px;
+  max-width: 330px;
+  _width: 180px;
+  padding: 4px 0;
+  margin: 0; // override default ul
+  list-style: none;
+  background-color: #fff;
+  border-color: #ccc;
+  border-color: rgba(0,0,0,.2);
+  border-style: solid;
+  border-width: 1px;
+  // box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  background-clip: padding-box;
+  zoom: 1;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  
+  &.wide{
+    min-width: 230px;
+    max-width: 430px;
+    _width: 230px;
+    
+    &.centered {
+      margin-left: -115px;
+    }
+  }
+
+  &.flush {
+    // Reset
+    padding: 0;
+    min-width: 0;
+
+    &.flush-right { right: 0; }
+
+    &.flush-left { left: 0; }
+
+    .avatar { padding: 0; }
+  }
+
+  // Dividers (basically an hr) within the dropdown
+  .divider {
+    height: 1px;
+    margin: 5px 1px;
+    overflow: hidden;
+    background-color: $borderColor;
+    border-bottom: 1px solid #fff;
+  }
+
+  // Links within the dropdown menu
+  a {
+    clearfix();
+    display: block;
+    position: relative;
+    padding: 3px 15px;
+    font-weight: normal;
+    line-height: $baseLineHeight;
+    color: $textColor;
+    white-space: nowrap;
+    cursor: pointer;
+
+    .pull-right {
+      float: none;
+      position: absolute;
+      right: 15px;
+    }
+
+    &.danger {
+      color: #fff;
+      background-color: $lightRed;
+    }
+  }
+}
+
+// Hover state
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: $grey-8;
+}
+
+// Open state for the dropdown
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+// Typeahead
+.typeahead {
+  margin-top: 2px; // give it some space to breathe
+  border-radius: 4px;
+}

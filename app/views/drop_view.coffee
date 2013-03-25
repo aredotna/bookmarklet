@@ -47,8 +47,8 @@ module.exports = class DropView extends View
     mediator.publish 'block:created', {type: type}
     @createBlock(data)
     
-  setLoading: ->   @$('#drop-zone').addClass('loading')
-  unsetLoading: -> @$('#drop-zone').removeClass('loading')
+  setLoading: ->   @$el.addClass('loading')
+  unsetLoading: -> @$el.removeClass('loading')
 
   createBlock: (data) ->
     item = new Item(data.block)
