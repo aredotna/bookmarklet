@@ -1,12 +1,12 @@
 (function () {
   var host = "http://marklet.are.na";
-  // var host = "http://localhost:3333"
+  //var host = "http://localhost:3333"
   var arena_frame;
   var arena_div;
 
   if (!document.getElementById("arena")) {
     initialize()
-  } h
+  }
 
   function initialize(){
     createFrame();
