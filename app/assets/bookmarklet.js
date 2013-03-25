@@ -34,7 +34,7 @@
   function createStyle(){
     marklet_style = document.createElement("style");
     marklet_style.type = "text/css";          
-    marklet_css = "#arena_frame,#arena_div{overflow:hidden;width:270px;height:350px;position:fixed;top:20px;right:20px;border:none}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);box-shadow: 3px 4px 10px rgba(0, 0, 0, .4);}#arena_frame:hover{background:rgba(255,255,255,0.9); box-shadow: 3px 4px 10px rgba(0, 0, 0, .5);}#arena_div{z-index:9999999999;display:none;opacity:0}"; 
+    marklet_css = "#arena_frame,#arena_div{overflow:hidden;width:270px;height:340px;position:fixed;top:20px;right:20px;border:none}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);box-shadow: 3px 4px 10px rgba(0, 0, 0, .4);}#arena_frame:hover{background:rgba(255,255,255,0.9); box-shadow: 3px 4px 10px rgba(0, 0, 0, .5);}#arena_div{z-index:9999999999;display:none;opacity:0}"; 
 
     if (marklet_style.styleSheet) {
       marklet_style.styleSheet.cssText = marklet_css;

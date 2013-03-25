@@ -1,0 +1,41 @@
+  <div class="visibility-selector btn-group square">
+    {{#if_can permissions "edit"}}
+      <a href='#' class='btn dropdown-toggle tip transparent square' data-animation="false" data-placement="right" title="{{state_explanation status}}" data-toggle='dropdown'>
+        <span id="state-indicator"><strong class='{{status}}'>{{capitalize status}}</strong></span>
+        <span class='caret'></span>
+      </a>
+
+      <ul class="dropdown-menu align-left">
+        <li>
+          <a class="channel-status public tip" href="#" data-channel-status="public" data-animation="false" data-placement="right" data-open="true" data-published="true" title="{{en.views.channel.states.public}}">
+            <strong class="public">Public</strong>
+          </a>
+        </li>
+
+        <li>
+          <a class="channel-status private tip" href="#" data-channel-status="private" data-animation="false" data-placement="right" data-open="false" data-published="false" title="{{en.views.channel.states.private}}">
+            <strong class="private">Private</strong>
+          </a>
+        </li>
+
+        <li>
+          <a class="channel-status closed tip" href="#" data-channel-status="closed" data-animation="false" data-placement="right" data-open="false" data-published="true" title="{{en.views.channel.states.closed}}">
+            <strong class="closed">Closed</strong>
+          </a>
+        </li>
+      </ul>
+    {{else}}
+      <span class="btn tip transparent square" data-animation="false" data-placement="right" title="{{state_explanation status}}">
+        <strong class='{{status}}'>{{capitalize status}}</strong>
+      </span>
+    {{/if_can}}
+  </div>
+{{else}}
+  <!-- 
+  <div class="btn-group square">
+    <span class="btn tip transparent square" data-animation="false" data-placement="left" title="{{en.views.channel.states.public}}">
+      <strong class='public'>Profile</strong>
+    </span>
+  </div>
+  -->
+

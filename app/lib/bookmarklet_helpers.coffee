@@ -1,3 +1,13 @@
+en = require 'en'
+
+Handlebars.template = ((fn)->
+  ->
+    template = fn.apply(this, arguments)
+    (data={})->
+      data.lang = en
+      template(data)
+)(Handlebars.template)
+
 Handlebars.registerHelper 'downcase', (content) ->
   content?.toLowerCase()
 
@@ -8,6 +18,9 @@ Handlebars.registerHelper "get_state", (published, open) ->
     'Closed'
   else
     'Public'
+
+Handlebars.registerHelper "state_explanation", (state, options) ->
+  en.views.channel.states[state]
 
 Handlebars.registerHelper "get_state_lowercase", (published, open) ->
   Handlebars.helpers.downcase(Handlebars.helpers.get_state(published, open))
@@ -159,3 +172,6 @@ String.prototype.capitalize = ->
 String.prototype.pluralize = (count) ->
   pluralized = if count is 1 then this else this + 's' 
   return pluralized
+
+Handlebars.registerHelper "capitalize", (string)->
+  string.capitalize()

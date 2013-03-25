@@ -1,11 +1,10 @@
 View     = require "views/base/view"
 Channel  = require "models/channel"
-template = require "templates/sidebar/new_channel"
+template = require "templates/new_channel"
 mediator = require "mediator"
 
 module.exports = class NewChannelView extends View
   template: template
-  id: "new-channel-container"
   autoRender: true
 
   initialize: ->

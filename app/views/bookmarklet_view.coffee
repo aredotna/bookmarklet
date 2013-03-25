@@ -2,6 +2,7 @@ View = require 'views/base/view'
 DropView = require 'views/drop_view'
 ChannelSearchView = require 'views/channel_search_view'
 CurrentChannelView = require 'views/current_channel_view'
+NewChannelView = require 'views/new_channel_view'
 Channel = require 'models/channel'
 template = require 'templates/sidebar'
 mediator = require 'mediator'
@@ -54,6 +55,9 @@ module.exports = class BookmarkletView extends View
       @subview 'search', new ChannelSearchView
         collection: @collection
         el: @$('.search-container')
+
+      @subview 'new-channel', new NewChannelView
+        container: @$('.new-channel-container')
 
       @subview 'drop', new DropView
         model: mediator.channel

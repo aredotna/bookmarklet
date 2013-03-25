@@ -3,7 +3,7 @@ config =
   client: {}
   pusher: {}
 
-production             = no    
+production             = no
 config.env             = if production then 'production' else 'development'
 config.api.root        = if production then 'http://api.are.na/' else 'http://localhost:3000/'
 config.api.versionRoot = "#{config.api.root}v2"

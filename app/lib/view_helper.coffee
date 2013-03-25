@@ -6,6 +6,8 @@ require 'lib/bookmarklet_helpers'
 # Application-specific view helpers
 # ---------------------------------
 
+Handlebars.registerPartial 'channel_state', require 'templates/state'
+
 # http://handlebarsjs.com/#helpers
 
 # Conditional evaluation
