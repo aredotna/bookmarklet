@@ -9,6 +9,7 @@ module.exports = class Item extends Model
 
   setURL: ->
     channelslug = mediator.channel.get('slug')
+    console.log "#{config.client.root}#{channelslug}/show/#{@id}"
     @set
-      url:"#{config.client.root}#{channelslug}/show:#{@id}"
+      url:"#{config.client.root}#{channelslug}/show/#{@id}"
       percent: 100
