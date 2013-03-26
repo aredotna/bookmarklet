@@ -261,7 +261,7 @@ placeholder(inherit);
 // ---------
 
 .drop-zone-container {
-  box();
+  display: table;
   position: relative;
   text-align: center;
   height: 235px;
@@ -280,13 +280,35 @@ placeholder(inherit);
   &.complete {
     .instructions { display: none; }
     .status-container { 
-      box();
+      display: block;
     }
+  }
+
+  &.success {
+    background-color: $droppableColor;
+    .status-success { display: block; }
+    .status-error { display: none; }
+  }
+
+  &.error {
+    background-color: $errorColor;
+    .status-success { display: none; }
+    .status-error { display: block; }    
   }
 
   &.loading {
     loading(white);
   }
+}
+
+.channel-not-set .drop-zone-container {
+  height: 303px;
+}
+
+.drop-zone {
+  width: 270px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .instructions {
@@ -312,8 +334,6 @@ placeholder(inherit);
 }
 
 .status-container {
-  display-box();
-  occupy-space();
   color: white;
   cursor: pointer;
 
@@ -325,20 +345,6 @@ placeholder(inherit);
     padding: 3px 7px;
     color: $droppableColor;
     background-color: white;
-  }
-
-  &.success {
-    background-color: $droppableColor;
-
-    .status-success { display: block; }
-    .status-error { display: none; }
-  }
-
-  &.error {
-    background-color: $errorColor;
-
-    .status-success { display: none; }
-    .status-error { display: block; }    
   }
 }
 

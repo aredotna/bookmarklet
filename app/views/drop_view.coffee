@@ -74,13 +74,11 @@ module.exports = class DropView extends View
     item.setURL()
     @unsetLoading()
     @$('.block-link').attr('href', item.get('url'))
-    @$el.addClass('complete').removeClass('ready')
-    @$('.status-container').addClass('success')
+    @$el.addClass('complete success').removeClass('ready')
     @timedReset()
 
   blockCreationFailed: =>
-    @$el.addClass('complete').removeClass('ready')
-    @$('.status-container').addClass('error')
+    @$el.addClass('complete error').removeClass('ready')
     @timedReset()
     
   render: =>
@@ -99,5 +97,4 @@ module.exports = class DropView extends View
     @reset()
 
   reset: ->
-    @$el.addClass('ready').removeClass('complete')
-    @$('.status-container').removeClass('success error')
+    @$el.addClass('ready').removeClass('complete success error')

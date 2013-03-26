@@ -1,4 +1,5 @@
 LinkView = require 'views/link_view'
+linkTemplate = require 'templates/link'
 
 module.exports = class CurrentChannelView extends LinkView
   container: '.current-channel-container'
@@ -10,3 +11,7 @@ module.exports = class CurrentChannelView extends LinkView
 
   activateLink: ->
     false
+
+  render: ->
+    return unless @model
+    super

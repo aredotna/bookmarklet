@@ -39,12 +39,17 @@ module.exports = class BookmarkletView extends View
     @subview 'current', new CurrentChannelView
       model: mediator.channel
 
+    @$el.removeClass('channel-not-set')
+
   getTemplateData: ->
     current_channel: mediator.channel?.toJSON()
 
   afterRender: ->
     super
     @renderSubviews()
+
+    unless mediator.channel
+      @$el.addClass('channel-not-set')
 
   renderSubviews: ->
     unless @renderedSubviews

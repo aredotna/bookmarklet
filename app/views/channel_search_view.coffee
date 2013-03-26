@@ -66,7 +66,7 @@ module.exports = class ChannelSearchView extends CollectionView
     if query.length
       @currentRequest?.abort()
       @startLoad()
-      @currentRequest = $.get config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
+      @currentRequest = $.getJSON config.api.versionRoot + '/search/channels?per=5&q=' + query, (data) =>
         @endLoad()
         @processSearchResults(data)
     else
@@ -74,8 +74,9 @@ module.exports = class ChannelSearchView extends CollectionView
 
   processSearchResults: (data)->
     @collection.reset(data.channels)
+    console.log data
 
-    if @visibleItems.length
+    if @collection.length
       @$list.show()
       $(window).bind 'click', @hideSearch
     else 
