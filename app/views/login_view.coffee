@@ -30,7 +30,7 @@ module.exports = class LoginView extends View
         password: @$('#session_password').val()
       success: (data) ->
         mediator.storage.setToken data.token
-        mediator.publish 'login:successful'
+        mediator.publish 'login'
       error: -> 
         mediator.publish 'login:failure'
     false
