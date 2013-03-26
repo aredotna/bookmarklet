@@ -143,8 +143,8 @@
   function arena_close() {
     if (window.removeEventListener) window.removeEventListener("message", getMessage, false)
     if (arena_frame) document.body.removeChild(arena_frame)
-    if (arena_div) document.body.removeNode(arena_div)
-    if (marklet_style) document.body.removeNode(marklet_style)
+    if (arena_div) document.body.removeChild(arena_div)
+    if (marklet_style) document.body.removeChild(marklet_style)
   }
 
 
