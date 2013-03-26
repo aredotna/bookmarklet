@@ -489,9 +489,9 @@ placeholder(inherit);
 // ------------
 
 .bookmarklet #login {
-  margin-top: 18px;
-  padding: 10px;
   overflow-y: auto;
+  padding-top: 33px;
+  background: $backgroundGray;
 
   .logo {
     text-align: center;
@@ -499,18 +499,16 @@ placeholder(inherit);
     padding-bottom: 20px;
   }
 
+  form {
+    padding: 10px;
+  }
+
   .btn {
-    gradientBar($blue-4, $blue-3);
+    background: $darkTextColor;
   }
 
   .forgot a {
     font-size: 11px;
     color: $grey-6;
-  }
-
-  .close-marklet {
-    position: fixed;
-    top: 1px;
-    right: 5px;
   }
 }
