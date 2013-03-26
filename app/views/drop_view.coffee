@@ -52,6 +52,8 @@ module.exports = class DropView extends View
   unsetLoading: -> @$el.removeClass('loading')
 
   createBlock: (data) ->
+    return @blockCreationFailed("Please select a channel to add to") unless mediator.channel
+
     item = new Item(data.block)
     item.set('type', data.type)
 
@@ -63,21 +65,26 @@ module.exports = class DropView extends View
     
     $.ajax
       type: 'POST'
-      url: "#{config.api.versionRoot}/channels/#{mediator.channel.id}/blocks"
+      url: "#{config.api.versionRoot}/channels/#{mediator.channel.get('slug')}/blocks"
       data: data
       success: (data)=>
         @blockCreated(data, item)
-      error: @blockCreationFailed
+      error: =>
+        @blockCreationFailed()
 
   blockCreated:(data, item) =>
     item.set(data)
     item.setURL()
     @unsetLoading()
-    @$('.block-link').attr('href', item.get('url'))
+
+    @$('.view-on-arena-link').attr('href', item.get('url'))
     @$el.addClass('complete success').removeClass('ready')
     @timedReset()
 
-  blockCreationFailed: =>
+  blockCreationFailed: (message)=>
+    @unsetLoading()
+    message ||= "Failed to create block"
+    @$('.status-error').html(message)
     @$el.addClass('complete error').removeClass('ready')
     @timedReset()
     
