@@ -52,7 +52,7 @@ module.exports = class DropView extends View
   unsetLoading: -> @$el.removeClass('loading')
 
   createBlock: (data) ->
-    return @blockCreationFailed("Please select a channel to add to") unless mediator.channel
+    return @blockCreationFailed("Please select the channel to which you'd like to connect this") unless mediator.channel
 
     item = new Item(data.block)
     item.set('type', data.type)
