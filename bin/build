@@ -1,0 +1,12 @@
+#! /bin/bash
+
+cd /var/www/marklet/$1/current 
+/usr/bin/perl -i -pe s/no/yes/g app/config.coffee
+brunch build --minify
+
+uglifyjs public/loader.js > public/loader.js
+
+# Doing this manually because brunch ignores files starting with . or # in the assets folder
+cp app/assets/.htaccess public/.htaccess
+
+rsync -avh /var/www/marklet/$1/current/public/ /var/www/marklet/$1

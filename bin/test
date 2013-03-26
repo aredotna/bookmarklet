@@ -1,0 +1,4 @@
+#! /bin/bash
+
+brunch build
+mocha-phantomjs ./public/test/index.html
