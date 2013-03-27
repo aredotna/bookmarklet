@@ -67,8 +67,9 @@
     var targetParent;
     
     if (typeof e.dataTransfer.getData("text/html") == "undefined" 
-      && e.target.tagName == "IMG") {
-      targetParent = closest(e.target, "A");
+      || e.target.tagName == "IMG") {
+
+      targetParent = closest(e.target, "A") || document.createElement('A')
 
       parentHTML = targetParent.cloneNode(false); 
       parentHTML.href = parentHTML.href;
@@ -143,8 +144,8 @@
   function arena_close() {
     if (window.removeEventListener) window.removeEventListener("message", getMessage, false)
     if (arena_frame) document.body.removeChild(arena_frame)
-    if (arena_div) document.body.removeChild(arena_div)
-    if (marklet_style) document.body.removeChild(marklet_style)
+    if (arena_div) document.body.removeNode(arena_div)
+    if (marklet_style) document.body.removeNode(marklet_style)
   }
 
 
@@ -217,5 +218,6 @@
       that = that.parentNode;
       if (that.tagName == tagname) return that
     }
+    return false;
   }
 })();
