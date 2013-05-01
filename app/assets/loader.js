@@ -1,5 +1,5 @@
 (function () {
-  var host = "http://marklet.are.na";
+  var host = "https://marklet.are.na";
   //var host = "http://localhost:3333"
   var arena_frame;
   var arena_div;
