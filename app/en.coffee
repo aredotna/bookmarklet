@@ -26,7 +26,7 @@ module.exports =
       add_connection_field: "Search for additional channels"
       collaborator_help: "Add a collaborator to work with you on this channel. They can add, remove, and organize the contents of the channel, as well as add other collaborators."
       states:
-        public: 'Everyone can view and add to this channel'
+        open: 'Everyone can view and add to this channel'
         private: 'Only you and collaborators can view and add to this channel'
         closed: 'Everyone can view, only you and collaborators can add to this channel'
       filter_tips:

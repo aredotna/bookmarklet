@@ -17,7 +17,7 @@ Handlebars.registerHelper "get_state", (published, open) ->
   else if open is false
     'Closed'
   else
-    'Public'
+    'Open'
 
 Handlebars.registerHelper "state_explanation", (state, options) ->
   en.views.channel.states[state]
@@ -108,6 +108,12 @@ Handlebars.registerHelper "partial", (name, opts) ->
 
 Handlebars.registerHelper "recent_time_ago", (string, time, opts) ->
   "#{string} #{moment(time).fromNow()}"
+
+Handlebars.registerHelper 'status_label', (status)->
+  if @status is "public"
+    "Open"
+  else
+    @status.capitalize()
 
 Handlebars.registerHelper "time_ago", (time, opts) ->
   moment(time).fromNow()
